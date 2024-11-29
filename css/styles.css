@@ -269,7 +269,9 @@ nav {
 }
 
 .section-content h2,
-.hero-content h1 {
+.hero-content h1,
+.desktop-hero-content h1,
+.mobile-hero-heading h1 {
     font-size: 3rem;
     margin-bottom: 2rem;
     background: linear-gradient(to right, var(--text-light), var(--accent));
