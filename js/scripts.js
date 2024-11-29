@@ -77,18 +77,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
  
-    // UI and Animation handlers
+    // UI handlers for Spotify player
     const UI = {
         elements: {
             songTitle: document.getElementById('song-title'),
             artistName: document.getElementById('artist-name'),
             albumImage: document.getElementById('album-image'),
-            nav: document.querySelector('.nav-wrapper'),
-            scrollContainer: document.querySelector('.scroll-container'),
-            sections: document.querySelectorAll('section'),
-            parallaxBgs: document.querySelectorAll('.parallax-bg'),
-            projectBgs: document.querySelectorAll('.project-bg'),
-            animatedElements: document.querySelectorAll('.project-content, .about-content, .contact-content')
         },
  
         updatePlayer(track) {
@@ -114,134 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
                 playerState.hasPlayedOnce = true;
             }
-        },
-
-        // Initialize intersection observer for smooth animations
-        initObservers() {
-            const options = {
-                threshold: 0.15, // Reduced threshold for earlier trigger
-                rootMargin: '0px'
-            };
-
-            // Add animate class to all elements that should animate
-            this.elements.animatedElements.forEach(element => {
-                element.classList.add('animate');
-            });
-
-            const animationObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        // Keep the animation visible
-                        animationObserver.unobserve(entry.target);
-                    }
-                });
-            }, options);
-
-            this.elements.animatedElements.forEach(element => {
-                animationObserver.observe(element);
-            });
-        },
-
-        // Modified parallax effect for smoother scrolling
-        handleParallax() {
-            const scrolled = window.scrollY;
-            
-            // Smooth parallax for background elements
-            this.elements.parallaxBgs.forEach(bg => {
-                const speed = 0.15; // Reduced speed for subtler effect
-                const yPos = -(scrolled * speed);
-                bg.style.transform = `translate3d(0, ${yPos}px, -1px) scale(1.1)`;
-            });
-
-            // Gentler project background parallax
-            this.elements.projectBgs.forEach(bg => {
-                const rect = bg.parentElement.getBoundingClientRect();
-                const speed = 0.08; // Reduced speed
-                const yPos = (rect.top * speed);
-                bg.style.transform = `translate3d(0, ${yPos}px, -1px)`;
-            });
-
-            // Smoother content parallax
-            this.elements.sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                const progress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
-                
-                if (progress > 0 && progress < 1) {
-                    const content = section.querySelector('.project-content, .about-content, .contact-content');
-                    if (content) {
-                        const speed = 0.02; // Very subtle movement
-                        const yPos = (rect.top * speed);
-                        content.style.transform = `translate3d(0, ${yPos}px, 0)`;
-                        content.style.opacity = Math.min(1, Math.max(0, progress * 1.5));
-                    }
-                }
-            });
-        },
-
-        // Enhanced scroll handler for smoother transitions
-        handleScroll() {
-            const scrolled = window.scrollY;
-            
-            // Smooth navigation opacity
-            const scrollPercent = Math.min(scrolled / 500, 0.8);
-            this.elements.nav.style.backgroundColor = `rgba(0, 0, 0, ${scrollPercent})`;
-            
-            // Update parallax effects with smooth transitions
-            this.handleParallax();
-
-            // Request next frame for smooth animations
-            requestAnimationFrame(() => {
-                this.elements.sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const progress = -rect.top / rect.height;
-                    
-                    if (progress >= 0 && progress <= 1) {
-                        section.style.opacity = 1;
-                    }
-                });
-            });
         }
     };
 
-    // Enhanced scroll handling with better performance
-    let lastKnownScrollPosition = 0;
-    let ticking = false;
-
-    window.addEventListener('scroll', () => {
-        lastKnownScrollPosition = window.scrollY;
-
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                UI.handleScroll();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-
-    // Smooth scrolling for navigation with enhanced behavior
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerOffset = 0; // Remove offset for full-screen sections
-                const elementPosition = target.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Initialize
-    UI.initObservers();
-    
     // Initialize Spotify updates
     async function updateSpotifyTrack() {
         const track = await spotifyAPI.getRecentTrack();
@@ -250,18 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial load
     updateSpotifyTrack();
-    UI.handleScroll();
 
-    // Set up intervals
+    // Set up intervals for token refresh and track updates
     setInterval(() => spotifyAPI.refreshToken(), 3000 * 1000); // 50 minutes
     setInterval(updateSpotifyTrack, 100000); // 100 seconds
-
-    // Add resize handler for responsive updates
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            UI.handleScroll();
-        }, 100);
-    });
 });
