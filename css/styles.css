@@ -290,7 +290,7 @@ nav {
   top: 5rem;
   right: 2rem;
   width: 400px;
-  display: none;
+  display: flex;
   align-items: center;
   padding: 1rem;
   border-radius: 1rem;
