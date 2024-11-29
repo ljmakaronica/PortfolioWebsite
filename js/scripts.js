@@ -16,29 +16,21 @@ document.addEventListener('DOMContentLoaded', () => {
         },
  
         updatePlayer(track) {
-            const widget = document.querySelector('.currently-playing');
-            
-            if (!track) {
-                if (widget) widget.style.display = 'none';
-                return;
-            }
-        
-            const { title, artist, albumUrl, spotifyUrl } = track;
-            
-            if (title !== playerState.currentTrack.title || 
-                artist !== playerState.currentTrack.artist) {
-                
-                this.elements.songTitle.textContent = title;
-                this.elements.artistName.textContent = artist;
-                this.elements.albumImage.src = albumUrl;
-                document.getElementById('spotify-link').href = spotifyUrl;
-                
-                if (widget) widget.style.display = 'flex';
-        
-                playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
-                playerState.hasPlayedOnce = true;
-            }
-        }
+    const widget = document.querySelector('.currently-playing');
+    if (!track) return;
+
+    const { title, artist, albumUrl, spotifyUrl } = track;
+    
+    if (title !== playerState.currentTrack.title || 
+        artist !== playerState.currentTrack.artist) {
+        this.elements.songTitle.textContent = title;
+        this.elements.artistName.textContent = artist;
+        this.elements.albumImage.src = albumUrl;
+        document.getElementById('spotify-link').href = spotifyUrl;
+        playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
+        playerState.hasPlayedOnce = true;
+    }
+}
     };
 
     async function getRecentTrack() {
