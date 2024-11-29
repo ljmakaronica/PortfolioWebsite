@@ -8,14 +8,20 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         hasPlayedOnce: false
     };
-
+ 
     const spotifyConfig = {
         accessToken: process.env.SPOTIFY_ACCESS_TOKEN,
         refreshToken: process.env.SPOTIFY_REFRESH_TOKEN,
         clientId: process.env.SPOTIFY_CLIENT_ID,
         clientSecret: process.env.SPOTIFY_CLIENT_SECRET
     };
-
+ 
+    // Check if Spotify credentials exist
+    const hasSpotifyCredentials = spotifyConfig.accessToken && 
+                                spotifyConfig.refreshToken && 
+                                spotifyConfig.clientId && 
+                                spotifyConfig.clientSecret;
+ 
     // Spotify API handlers
     const spotifyAPI = {
         async refreshToken() {
@@ -28,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     },
                     body: `grant_type=refresh_token&refresh_token=${spotifyConfig.refreshToken}`
                 });
-
+ 
                 const data = await response.json();
                 if (data.access_token) {
                     spotifyConfig.accessToken = data.access_token;
@@ -37,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error refreshing token:', error);
             }
         },
-
+ 
         async getRecentTrack() {
             try {
                 const response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
@@ -60,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             title: track.name,
                             artist: track.artists.map(artist => artist.name).join(', '),
                             albumUrl: track.album.images[0].url,
-                            spotifyUrl: track.external_urls.spotify  // Add this line
+                            spotifyUrl: track.external_urls.spotify
                         };
                     }
                 }
@@ -70,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return null;
         }
     };
-
+ 
     // UI and Animation handlers
     const UI = {
         elements: {
@@ -84,9 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
             projectBgs: document.querySelectorAll('.project-bg'),
             animatedElements: document.querySelectorAll('.project-content, .about-content, .contact-content')
         },
-
+ 
         updatePlayer(track) {
-            if (!track) return;
+            const widget = document.querySelector('.currently-playing');
+            
+            if (!track) {
+                if (widget) widget.style.display = 'none';
+                return;
+            }
         
             const { title, artist, albumUrl, spotifyUrl } = track;
             
@@ -96,7 +107,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.elements.songTitle.textContent = title;
                 this.elements.artistName.textContent = artist;
                 this.elements.albumImage.src = albumUrl;
-                document.getElementById('spotify-link').href = spotifyUrl;  // Add this line
+                document.getElementById('spotify-link').href = spotifyUrl;
+                
+                if (widget) widget.style.display = 'flex';
         
                 playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
                 playerState.hasPlayedOnce = true;
