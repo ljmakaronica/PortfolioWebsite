@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Spotify player state management
     const playerState = {
         currentTrack: {
             title: '',
@@ -8,76 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         hasPlayedOnce: false
     };
- 
-    const spotifyConfig = {
-        accessToken: process.env.SPOTIFY_ACCESS_TOKEN,
-        refreshToken: process.env.SPOTIFY_REFRESH_TOKEN,
-        clientId: process.env.SPOTIFY_CLIENT_ID,
-        clientSecret: process.env.SPOTIFY_CLIENT_SECRET
-    };
- 
-    // Check if Spotify credentials exist
-    const hasSpotifyCredentials = spotifyConfig.accessToken && 
-                                spotifyConfig.refreshToken && 
-                                spotifyConfig.clientId && 
-                                spotifyConfig.clientSecret;
- 
-    // Spotify API handlers
-    const spotifyAPI = {
-        async refreshToken() {
-            try {
-                const response = await fetch('https://accounts.spotify.com/api/token', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        'Authorization': 'Basic ' + btoa(`${spotifyConfig.clientId}:${spotifyConfig.clientSecret}`)
-                    },
-                    body: `grant_type=refresh_token&refresh_token=${spotifyConfig.refreshToken}`
-                });
- 
-                const data = await response.json();
-                if (data.access_token) {
-                    spotifyConfig.accessToken = data.access_token;
-                }
-            } catch (error) {
-                console.error('Error refreshing token:', error);
-            }
-        },
- 
-        async getRecentTrack() {
-            try {
-                const response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
-                    headers: {
-                        'Authorization': `Bearer ${spotifyConfig.accessToken}`
-                    }
-                });
-        
-                if (response.status === 401) {
-                    await this.refreshToken();
-                    return this.getRecentTrack();
-                }
-        
-                if (response.ok) {
-                    const data = await response.json();
-                    const track = data.items[0]?.track;
-                    
-                    if (track) {
-                        return {
-                            title: track.name,
-                            artist: track.artists.map(artist => artist.name).join(', '),
-                            albumUrl: track.album.images[0].url,
-                            spotifyUrl: track.external_urls.spotify
-                        };
-                    }
-                }
-            } catch (error) {
-                console.error('Error fetching track:', error);
-            }
-            return null;
-        }
-    };
- 
-    // UI handlers for Spotify player
+
     const UI = {
         elements: {
             songTitle: document.getElementById('song-title'),
@@ -111,16 +41,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    async function getRecentTrack() {
+        try {
+            const response = await fetch('/api/spotify?action=recent');
+            if (!response.ok) throw new Error('API request failed');
+            
+            const data = await response.json();
+            const track = data.items[0]?.track;
+            
+            if (track) {
+                return {
+                    title: track.name,
+                    artist: track.artists.map(artist => artist.name).join(', '),
+                    albumUrl: track.album.images[0].url,
+                    spotifyUrl: track.external_urls.spotify
+                };
+            }
+        } catch (error) {
+            console.error('Error fetching track:', error);
+        }
+        return null;
+    }
+
     // Initialize Spotify updates
     async function updateSpotifyTrack() {
-        const track = await spotifyAPI.getRecentTrack();
+        const track = await getRecentTrack();
         UI.updatePlayer(track);
     }
 
     // Initial load
     updateSpotifyTrack();
 
-    // Set up intervals for token refresh and track updates
-    setInterval(() => spotifyAPI.refreshToken(), 3000 * 1000); // 50 minutes
-    setInterval(updateSpotifyTrack, 100000); // 100 seconds
+    // Update track every 100 seconds
+    setInterval(updateSpotifyTrack, 100000);
 });
