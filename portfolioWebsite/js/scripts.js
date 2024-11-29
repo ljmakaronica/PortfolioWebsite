@@ -9,13 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
         hasPlayedOnce: false
     };
 
-    // Spotify API configuration
     const spotifyConfig = {
-        accessToken: 'ACCESS_TOKEN_HERE',
-        refreshToken: 'REFRESH_TOKEN_HERE',
-        clientId: 'clientId_HERE',
-        clientSecret: 'clientSecret_HERE'
-    };
+    accessToken: process.env.SPOTIFY_ACCESS_TOKEN,
+    refreshToken: process.env.SPOTIFY_REFRESH_TOKEN,
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET
+};
 
     // Spotify API handlers
     const spotifyAPI = {
