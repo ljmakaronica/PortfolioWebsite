@@ -288,7 +288,7 @@ nav {
   top: 5rem;
   right: 2rem;
   width: 400px;
-  display: flex;
+  display: none;
   align-items: center;
   padding: 1rem;
   border-radius: 1rem;
