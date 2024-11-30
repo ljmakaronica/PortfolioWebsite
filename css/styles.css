@@ -816,6 +816,8 @@ nav {
   height: 75px;
   border-radius: 4px;
   object-fit: cover;
+  margin-left: 0.8rem; /* Added margin to align with album art */
+
 }
 
 .book-details h3 {
