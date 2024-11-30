@@ -286,8 +286,8 @@ nav {
 
 /* Currently Playing Widget */
 .currently-playing {
-  position: fixed;
-  top: 5rem;
+  position: absolute;
+  top: 5rem;  /* Reduced from 5rem to account for new positioning */
   right: 2rem;
   width: 400px;
   display: flex;
@@ -777,6 +777,66 @@ nav {
   }
   
   .desktop-hero-content {
+    display: none;
+  }
+}
+/* Currently Reading Widget */
+.currently-reading {
+  position: absolute;
+  top: 12rem;  /* Positioned below Spotify widget */
+  right: 2rem;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  gap: 1rem;
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+.currently-reading a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.currently-reading:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+
+
+
+
+.book-image {
+  width: 50px;
+  height: 75px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.book-details h3 {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 0.25rem;
+}
+
+.book-details p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+  .currently-reading {
     display: none;
   }
 }
