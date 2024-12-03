@@ -283,11 +283,10 @@ nav {
     transform: translateZ(0);
     -webkit-transform: translateZ(0);
 }
-
 /* Currently Playing Widget */
 .currently-playing {
   position: absolute;
-  top: 5rem;  /* Reduced from 5rem to account for new positioning */
+  top: 5rem;
   right: 2rem;
   width: 400px;
   display: flex;
@@ -301,6 +300,8 @@ nav {
   z-index: 3;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 1.5rem;
+  position: relative;
 }
 
 .currently-playing a {
@@ -312,7 +313,7 @@ nav {
   width: 100%;
 }
 
-.currently-playing.currently-playing:hover {
+.currently-playing:hover {
   background: rgba(0, 0, 0, 0.6);
 }
 
@@ -783,7 +784,7 @@ nav {
 /* Currently Reading Widget */
 .currently-reading {
   position: absolute;
-  top: 12rem;  /* Positioned below Spotify widget */
+  top: 12rem;
   right: 2rem;
   width: 400px;
   display: flex;
@@ -797,6 +798,8 @@ nav {
   z-index: 3;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 1.5rem;
+  position: relative;
 }
 
 .currently-reading a {
@@ -836,4 +839,16 @@ nav {
   .currently-reading {
     display: none;
   }
+}
+
+/* Label Styling for Both Widgets */
+.widget-label {
+  position: absolute;
+  top: -1.5rem;
+  left: 0;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
 }
