@@ -301,7 +301,6 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   margin-top: 1.5rem;
-  position: relative;
 }
 
 .currently-playing a {
@@ -799,7 +798,6 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   margin-top: 1.5rem;
-  position: relative;
 }
 
 .currently-reading a {
