@@ -64,6 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load
     updateSpotifyTrack();
 
-    // Update track every 100 seconds
-    setInterval(updateSpotifyTrack, 100000);
+    // Update track every 15 minutes
+    setInterval(updateSpotifyTrack, 900000);
 });
