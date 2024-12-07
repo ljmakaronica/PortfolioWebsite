@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <meta property="og:image" content="images/IMG_2396.JPEG">​​​​​​​​​​​​​​​​
+    <meta property="og:image" content="images/IMG_2396.JPEG">
 </head>
 <body>
     <div class="nav-wrapper">
@@ -34,61 +34,62 @@
     </div>
 
     <section id="home">
-        <div class="hero-container">
-            <!-- Mobile-first heading that will only show on mobile -->
-            <div class="mobile-hero-heading">
-                <h1>Marko Ljuboja</h1>
-                <p class="subtitle">Junior at DePaul University</p>
-            </div>
+        <!-- Mobile-first heading that will only show on mobile -->
+        <div class="mobile-hero-heading">
+            <h1>Marko Ljuboja</h1>
+            <p class="subtitle">Junior at DePaul University</p>
+        </div>
 
-            <div class="currently-playing">
-                <div class="widget-label">Last Played</div>
-                <a href="" id="spotify-link" target="_blank" title="Last song I played!">
-                    <div class="now-playing-indicator">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
+        <div class="currently-playing">
+            <div class="widget-label">Last Played</div>
+            <a href="" id="spotify-link" target="_blank" title="Last song I played!">
+                <div class="now-playing-indicator">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <img id="album-image" class="album-image" src="" alt="Album Cover">
+                <div class="song-details">
+                    <h3 id="song-title">Loading...</h3>
+                    <p id="artist-name"></p>
+                </div>
+            </a>
+        </div>
+        
+        <div class="currently-reading">
+            <div class="widget-label">Last Read</div>
+            <a id="goodreads-link" href="https://www.goodreads.com/book/show/28348.Crime_and_Punishment" target="_blank" title="Last book I read!">
+                <div class="book-indicator">
+                    <div class="bookmark"></div>
+                </div>
+                <img src="images/crimeandpunish.jpeg" id="book-image" class="book-image" alt="Crime and Punishment by Fyodor Dostoyevsky">
+                <div class="book-details">
+                    <h3 id="book-title">Crime and Punishment</h3>
+                    <p class="book-author">by Fyodor Dostoyevsky</p>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
                     </div>
-                    <img id="album-image" class="album-image" src="" alt="Album Cover">
-                    <div class="song-details">
-                        <h3 id="song-title">Loading...</h3>
-                        <p id="artist-name"></p>
-                    </div>
-                </a>
-            </div>
-            
-            <div class="currently-reading">
-                <div class="widget-label">Last Read</div>
-                <a id="goodreads-link" href="https://www.goodreads.com/book/show/28348.Crime_and_Punishment" target="_blank" title="Last book I read!">
-                    <div class="book-indicator">
-                        <div class="bookmark"></div>
-                    </div>
-                    <img src="images/crimeandpunish.jpeg" id="book-image" class="book-image" alt="Crime and Punishment by Fyodor Dostoyevsky">
-                    <div class="book-details">
-                        <h3 id="book-title">Crime and Punishment</h3>
-                        <p class="book-author">by Fyodor Dostoyevsky</p>
-                        <div class="progress-bar">
-                            <div class="progress"></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="hero-container">
             <div class="left-column">
                 <div class="profile-image">
                     <img src="images/IMG_2396.JPEG" alt="Marko Ljuboja">
                 </div>
                 <div class="quick-info">
-                  <p><i class="fas fa-graduation-cap"></i> Computer Science @ DePaul</p>
-                  <p><i class="fas fa-calendar"></i> Graduating Early: November 2025</p>
-                  <p><i class="fas fa-code-branch"></i> Software Development Concentration</p>
-                  <p><i class="fas fa-language"></i> English, Serbian, Spanish</p>
-                  <p class="resume-button">
-                      <a href="/assets/marko-ljuboja-resume.pdf" target="_blank">
-                          <i class="fas fa-external-link-alt"></i>
-                          VIEW RESUME
-                      </a>
-                  </p>
-              </div>
+                    <p><i class="fas fa-graduation-cap"></i> Computer Science @ DePaul</p>
+                    <p><i class="fas fa-calendar"></i> Graduating Early: November 2025</p>
+                    <p><i class="fas fa-code-branch"></i> Software Development Concentration</p>
+                    <p><i class="fas fa-language"></i> English, Serbian, Spanish</p>
+                    <p class="resume-button">
+                        <a href="/assets/marko-ljuboja-resume.pdf" target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                            VIEW RESUME
+                        </a>
+                    </p>
+                </div>
             </div>
             
             <div class="right-column">
@@ -144,44 +145,44 @@
     </section>
 
     <section id="experience">
-      <div class="section-content">
-          <h2>Experience & Activities</h2>
-          <div class="timeline">
-              <div class="timeline-entry">
-                  <div class="timeline-date">January 2024 - Present</div>
-                  <div class="timeline-content">
-                      <h3>President</h3>
-                      <h4>DePaul Serbian Cultural Club</h4>
-                      <p>Leading cultural events planning and community engagement initiatives</p>
-                  </div>
-              </div>
-              <div class="timeline-entry">
-                  <div class="timeline-date">May 2024 - October 2024</div>
-                  <div class="timeline-content">
-                      <h3>Boat Launch Assistant</h3>
-                      <h4>Chicago River Canoe and Kayak</h4>
-                      <p>Managed customer safety, processed transactions, and provided excellent service</p>
-                  </div>
-              </div>
-              <div class="timeline-entry">
-                  <div class="timeline-date">January 2023 - January 2024</div>
-                  <div class="timeline-content">
-                      <h3>Service Staff</h3>
-                      <h4>Café Salsa</h4>
-                      <p>Handled customer service in a fast-paced environment</p>
-                  </div>
-              </div>
-              <div class="timeline-entry">
-                  <div class="timeline-date">August 2022 - Present</div>
-                  <div class="timeline-content">
-                      <h3>Member</h3>
-                      <h4>DePaul Computer Science Society</h4>
-                      <p>Participating in hackathons and professional development events</p>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </section>
+        <div class="section-content">
+            <h2>Experience & Activities</h2>
+            <div class="timeline">
+                <div class="timeline-entry">
+                    <div class="timeline-date">January 2024 - Present</div>
+                    <div class="timeline-content">
+                        <h3>President</h3>
+                        <h4>DePaul Serbian Cultural Club</h4>
+                        <p>Leading cultural events planning and community engagement initiatives</p>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="timeline-date">May 2024 - October 2024</div>
+                    <div class="timeline-content">
+                        <h3>Boat Launch Assistant</h3>
+                        <h4>Chicago River Canoe and Kayak</h4>
+                        <p>Managed customer safety, processed transactions, and provided excellent service</p>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="timeline-date">January 2023 - January 2024</div>
+                    <div class="timeline-content">
+                        <h3>Service Staff</h3>
+                        <h4>Café Salsa</h4>
+                        <p>Handled customer service in a fast-paced environment</p>
+                    </div>
+                </div>
+                <div class="timeline-entry">
+                    <div class="timeline-date">August 2022 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Member</h3>
+                        <h4>DePaul Computer Science Society</h4>
+                        <p>Participating in hackathons and professional development events</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="projects">
         <div class="section-content">

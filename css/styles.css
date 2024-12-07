@@ -158,9 +158,9 @@ nav {
   font-size: 0.8rem;
 }
 
-/* Widget Styles - Updated for consistent heights */
+/* Widget Styles - Updated for mobile */
 .currently-playing {
-  position: absolute;
+  position: fixed;
   top: 5rem;
   right: 2rem;
   width: 400px;
@@ -176,17 +176,18 @@ nav {
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   margin-top: 1.5rem;
-  height: 82px; 
+  height: 82px;
+  transition: var(--transition);
 }
 
 .currently-reading {
-  position: absolute;
+  position: fixed;
   top: 12rem;
   right: 2rem;
   width: 400px;
   display: flex;
   align-items: center;
-  padding: 0.7rem;  
+  padding: 0.7rem;
   border-radius: 1rem;
   background: var(--card-bg);
   backdrop-filter: blur(10px);
@@ -197,6 +198,7 @@ nav {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   margin-top: 1.5rem;
   height: 82px;
+  transition: var(--transition);
 }
 
 .currently-playing a,
@@ -212,6 +214,7 @@ nav {
 .currently-playing:hover,
 .currently-reading:hover {
   background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
 }
 
 .album-image {
@@ -226,7 +229,7 @@ nav {
   height: 63px;
   border-radius: 4px;
   object-fit: cover;
-  margin-left: 0.5rem; 
+  margin-left: 0.5rem;
 }
 
 .song-details h3,
@@ -240,10 +243,6 @@ nav {
 .book-details p {
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.6);
-}
-
-.book-details p {
-  margin-bottom: 0.25rem; /* Adjusted margin */
 }
 
 .now-playing-indicator {
@@ -337,6 +336,7 @@ nav {
 .skill-tags span:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent);
+  transform: translateY(-2px);
 }
 
 /* Bio Section */
@@ -494,6 +494,21 @@ nav {
 #experience {
   background: var(--section-bg);
   padding: 6rem 2rem;
+}
+
+.section-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-content h2 {
+  font-size: 3rem;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  background: linear-gradient(to right, var(--text-light), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 #experience .timeline {
@@ -657,7 +672,15 @@ nav {
 
   .currently-playing,
   .currently-reading {
-    display: none;
+    position: static;
+    width: calc(100% - 2rem);
+    margin: 1rem 1rem;
+    max-width: none;
+    height: 70px;
+  }
+
+  .currently-playing {
+    margin-top: 4rem;
   }
 
   .bio-wrapper {
@@ -667,6 +690,31 @@ nav {
 
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .widget-label {
+    top: -1.2rem;
+    font-size: 0.65rem;
+  }
+
+  .album-image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .book-image {
+    width: 38px;
+    height: 57px;
+  }
+
+  .song-details h3,
+  .book-details h3 {
+    font-size: 0.85rem;
+  }
+
+  .song-details p,
+  .book-details p {
+    font-size: 0.75rem;
   }
 }
 
@@ -715,6 +763,17 @@ nav {
 
   #experience .timeline {
     padding-left: 30px;
+  }
+
+  .currently-playing,
+  .currently-reading {
+    padding: 0.8rem;
+    height: 65px;
+    margin: 0.5rem 0.5rem;
+  }
+
+  .currently-playing {
+    margin-top: 4rem;
   }
 }
 
@@ -777,6 +836,36 @@ nav {
   .contact-links a {
     padding: 0.75rem;
     font-size: 0.9rem;
+  }
+
+  .currently-playing,
+  .currently-reading {
+    padding: 0.6rem;
+    height: 60px;
+    margin: 0.5rem 0.5rem;
+  }
+
+  .currently-playing {
+    margin-top: 3.5rem;
+  }
+
+  .album-image {
+    width: 35px;
+    height: 35px;
+  }
+
+  .book-image {
+    width: 32px;
+    height: 48px;
+  }
+
+  .song-details h3,
+  .book-details h3 {
+    font-size: 0.75rem;
+  }
+
+  .widget-label {
+    font-size: 0.6rem;
   }
 }
 
