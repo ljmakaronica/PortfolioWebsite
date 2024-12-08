@@ -117,64 +117,76 @@ document.addEventListener('DOMContentLoaded', () => {
           let isDragging = false;
           let dragStarted = false;
           let currentTranslateX = 0;
+          let touchStartTime = 0;
+          let hasMoved = false;
           
           function handleTouchStart(e) {
               if (e.touches.length !== 1) return;
               
-              isDragging = true;
-              dragStarted = true;
               startX = e.touches[0].clientX;
-              
-              // Remove transition while dragging
-              widget.style.transition = 'none';
+              touchStartTime = Date.now();
+              hasMoved = false;
               
               // Get current transform value if any
               const style = window.getComputedStyle(widget);
               const matrix = new WebKitCSSMatrix(style.transform);
               currentTranslateX = matrix.m41;
-              
-              // Stop the peek animation during drag
-              widget.classList.remove('widget-peek');
-              
-              e.preventDefault();
           }
           
           function handleTouchMove(e) {
-              if (!isDragging) return;
-              
               const x = e.touches[0].clientX;
-              const walk = x - startX + currentTranslateX;
-              const constrainedWalk = Math.min(0, Math.max(-340, walk));
+              const deltaX = x - startX;
               
-              widget.style.transform = `translateX(${constrainedWalk}px)`;
+              // Only start dragging if moved more than 10px horizontally
+              if (!isDragging && Math.abs(deltaX) > 10) {
+                  isDragging = true;
+                  dragStarted = true;
+                  hasMoved = true;
+                  widget.style.transition = 'none';
+                  widget.classList.remove('widget-peek');
+              }
               
-              e.preventDefault();
+              if (isDragging) {
+                  const walk = x - startX + currentTranslateX;
+                  const constrainedWalk = Math.min(0, Math.max(-340, walk));
+                  widget.style.transform = `translateX(${constrainedWalk}px)`;
+                  e.preventDefault(); // Only prevent default if actually dragging
+              }
           }
           
           function handleTouchEnd(e) {
-              if (!isDragging) return;
+              const touchDuration = Date.now() - touchStartTime;
               
-              isDragging = false;
-              dragStarted = false;
+              // If it was a short touch with minimal movement, treat as a click
+              if (touchDuration < 200 && !hasMoved) {
+                  return;
+              }
               
-              // Add transition back for smooth return
-              widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
-              widget.style.transform = 'translateX(0)';
-              currentTranslateX = 0;
-              
-              // Reset the peek animation
-              setTimeout(() => {
-                  if (!isDragging) {
-                      widget.classList.add('widget-peek');
-                  }
-              }, 300);
+              if (isDragging) {
+                  isDragging = false;
+                  dragStarted = false;
+                  
+                  // Add transition back for smooth return
+                  widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                  widget.style.transform = 'translateX(0)';
+                  currentTranslateX = 0;
+                  
+                  // Reset the peek animation
+                  setTimeout(() => {
+                      if (!isDragging) {
+                          widget.classList.add('widget-peek');
+                      }
+                  }, 300);
+                  
+                  e.preventDefault();
+              }
           }
           
-          // Cleanup function to ensure proper state reset
           function cleanup() {
               isDragging = false;
               dragStarted = false;
               currentTranslateX = 0;
+              hasMoved = false;
               widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
               widget.style.transform = 'translateX(0)';
           }
@@ -186,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
           widget.removeEventListener('touchcancel', handleTouchEnd);
           
           // Add the new listeners
-          widget.addEventListener('touchstart', handleTouchStart, { passive: false });
+          widget.addEventListener('touchstart', handleTouchStart, { passive: true });
           widget.addEventListener('touchmove', handleTouchMove, { passive: false });
           widget.addEventListener('touchend', handleTouchEnd);
           widget.addEventListener('touchcancel', handleTouchEnd);
