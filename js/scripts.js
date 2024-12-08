@@ -114,39 +114,61 @@ document.addEventListener('DOMContentLoaded', () => {
       
       widgets.forEach(widget => {
           let startX = 0;
-          let currentTranslate = 0;
+          let currentX = 0;
           let isDragging = false;
-
-          widget.addEventListener('touchstart', (e) => {
+          let initialTouchX = 0;
+          
+          function handleTouchStart(e) {
               isDragging = true;
-              startX = e.touches[0].clientX - currentTranslate;
+              initialTouchX = e.touches[0].clientX;
+              startX = e.touches[0].clientX;
+              currentX = widget.getBoundingClientRect().x;
+              
+              // Remove transition while dragging
               widget.style.transition = 'none';
-          });
-
-          widget.addEventListener('touchmove', (e) => {
+              
+              // Prevent default to avoid scrolling while dragging
+              e.preventDefault();
+          }
+          
+          function handleTouchMove(e) {
               if (!isDragging) return;
               
-              const currentX = e.touches[0].clientX;
-              const diff = currentX - startX;
-              const translate = Math.min(0, Math.max(-340, diff));
+              const touchX = e.touches[0].clientX;
+              const deltaX = touchX - startX;
               
-              widget.style.transform = `translateX(${translate}px)`;
-              currentTranslate = translate;
-          });
-
-          const endDrag = () => {
+              // Calculate new position, constrain between -340 and 0
+              const newX = Math.min(0, Math.max(-340, deltaX));
+              
+              // Apply the transform
+              widget.style.transform = `translateX(${newX}px)`;
+              
+              // Prevent default to avoid scrolling while dragging
+              e.preventDefault();
+          }
+          
+          function handleTouchEnd() {
               if (!isDragging) return;
               isDragging = false;
+              
+              // Reset transition for smooth snap back
               widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
               widget.style.transform = 'translateX(0)';
-              currentTranslate = 0;
-          };
-
-          widget.addEventListener('touchend', endDrag);
-          widget.addEventListener('touchcancel', endDrag);
+              
+              // Reset the peek animation class
+              widget.classList.remove('widget-peek');
+              void widget.offsetWidth; // Trigger reflow
+              widget.classList.add('widget-peek');
+          }
+          
+          // Add touch event listeners
+          widget.addEventListener('touchstart', handleTouchStart, { passive: false });
+          widget.addEventListener('touchmove', handleTouchMove, { passive: false });
+          widget.addEventListener('touchend', handleTouchEnd);
+          widget.addEventListener('touchcancel', handleTouchEnd);
       });
 
-      // Add peek animation class after a delay
+      // Add initial peek animation after a delay
       setTimeout(() => {
           widgets.forEach(widget => {
               widget.classList.add('widget-peek');

@@ -681,6 +681,7 @@ nav {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
     z-index: 1000;
+    touch-action: pan-x; /* Only allow horizontal panning */
   }
 
   .currently-playing {
@@ -700,7 +701,13 @@ nav {
   .widget-peek {
     animation: peekIn 5s ease-in-out infinite;  /* Slower animation cycle */
   }
-  
+  .currently-playing,
+.currently-reading {
+    transform: translateX(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
   .bio-wrapper {
     margin-top: 2rem;
     order: 4;
