@@ -114,58 +114,89 @@ document.addEventListener('DOMContentLoaded', () => {
       
       widgets.forEach(widget => {
           let startX = 0;
-          let currentX = 0;
           let isDragging = false;
-          let initialTouchX = 0;
+          let dragStarted = false;
+          let currentTranslateX = 0;
           
           function handleTouchStart(e) {
+              if (e.touches.length !== 1) return;
+              
               isDragging = true;
-              initialTouchX = e.touches[0].clientX;
+              dragStarted = true;
               startX = e.touches[0].clientX;
-              currentX = widget.getBoundingClientRect().x;
               
               // Remove transition while dragging
               widget.style.transition = 'none';
               
-              // Prevent default to avoid scrolling while dragging
+              // Get current transform value if any
+              const style = window.getComputedStyle(widget);
+              const matrix = new WebKitCSSMatrix(style.transform);
+              currentTranslateX = matrix.m41;
+              
+              // Stop the peek animation during drag
+              widget.classList.remove('widget-peek');
+              
               e.preventDefault();
           }
           
           function handleTouchMove(e) {
               if (!isDragging) return;
               
-              const touchX = e.touches[0].clientX;
-              const deltaX = touchX - startX;
+              const x = e.touches[0].clientX;
+              const walk = x - startX + currentTranslateX;
+              const constrainedWalk = Math.min(0, Math.max(-340, walk));
               
-              // Calculate new position, constrain between -340 and 0
-              const newX = Math.min(0, Math.max(-340, deltaX));
+              widget.style.transform = `translateX(${constrainedWalk}px)`;
               
-              // Apply the transform
-              widget.style.transform = `translateX(${newX}px)`;
-              
-              // Prevent default to avoid scrolling while dragging
               e.preventDefault();
           }
           
-          function handleTouchEnd() {
+          function handleTouchEnd(e) {
               if (!isDragging) return;
-              isDragging = false;
               
-              // Reset transition for smooth snap back
+              isDragging = false;
+              dragStarted = false;
+              
+              // Add transition back for smooth return
               widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
               widget.style.transform = 'translateX(0)';
+              currentTranslateX = 0;
               
-              // Reset the peek animation class
-              widget.classList.remove('widget-peek');
-              void widget.offsetWidth; // Trigger reflow
-              widget.classList.add('widget-peek');
+              // Reset the peek animation
+              setTimeout(() => {
+                  if (!isDragging) {
+                      widget.classList.add('widget-peek');
+                  }
+              }, 300);
           }
           
-          // Add touch event listeners
+          // Cleanup function to ensure proper state reset
+          function cleanup() {
+              isDragging = false;
+              dragStarted = false;
+              currentTranslateX = 0;
+              widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+              widget.style.transform = 'translateX(0)';
+          }
+          
+          // Remove any existing listeners before adding new ones
+          widget.removeEventListener('touchstart', handleTouchStart);
+          widget.removeEventListener('touchmove', handleTouchMove);
+          widget.removeEventListener('touchend', handleTouchEnd);
+          widget.removeEventListener('touchcancel', handleTouchEnd);
+          
+          // Add the new listeners
           widget.addEventListener('touchstart', handleTouchStart, { passive: false });
           widget.addEventListener('touchmove', handleTouchMove, { passive: false });
           widget.addEventListener('touchend', handleTouchEnd);
           widget.addEventListener('touchcancel', handleTouchEnd);
+          
+          // Add cleanup on page visibility change
+          document.addEventListener('visibilitychange', () => {
+              if (document.hidden) {
+                  cleanup();
+              }
+          });
       });
 
       // Add initial peek animation after a delay
