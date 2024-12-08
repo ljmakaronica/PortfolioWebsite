@@ -160,7 +160,7 @@ nav {
 
 /* Widget Styles - Updated for mobile */
 .currently-playing {
-  position: fixed;
+  position: absolute;
   top: 5rem;
   right: 2rem;
   width: 400px;
@@ -181,7 +181,7 @@ nav {
 }
 
 .currently-reading {
-  position: fixed;
+  position: absolute;
   top: 12rem;
   right: 2rem;
   width: 400px;
@@ -672,17 +672,35 @@ nav {
 
   .currently-playing,
   .currently-reading {
-    position: static;
-    width: calc(100% - 2rem);
-    margin: 1rem 1rem;
+    position: fixed;
+    right: -340px;
+    width: 400px;
+    margin: 0;
     max-width: none;
     height: 70px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    z-index: 1000;
   }
 
   .currently-playing {
-    margin-top: 4rem;
+    top: 120px;  /* Align with profile image */
   }
 
+  .currently-reading {
+    top: 250px;  /* Below the first widget */
+  }
+
+  @keyframes peekIn {
+    0%, 85%, 100% { transform: translateX(0); }
+    90% { transform: translateX(-15px); }
+    95% { transform: translateX(-10px); }
+  }
+
+  .widget-peek {
+    animation: peekIn 5s ease-in-out infinite;  /* Slower animation cycle */
+  }
+  
   .bio-wrapper {
     margin-top: 2rem;
     order: 4;
