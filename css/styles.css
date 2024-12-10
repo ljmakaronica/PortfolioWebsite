@@ -545,10 +545,10 @@ nav {
   transition: var(--transition);
 }
 
-#experience .timeline-entry:hover::before, #experience .timeline-entry.active::before {
+#experience .timeline-entry:hover::before,
+#experience .timeline-entry:active::before {
   transform: scale(1.2);
   background: var(--accent);
-  
 }
 
 #experience .timeline-date {
@@ -566,7 +566,8 @@ nav {
   transition: var(--transition);
 }
 
-#experience .timeline-content:hover, #experience .timeline-content.active {
+#experience .timeline-content:hover,
+#experience .timeline-content:active {
   transform: translateX(10px);
   border-color: var(--accent);
   background: rgba(0, 0, 0, 0.6);
