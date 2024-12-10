@@ -152,6 +152,7 @@ nav {
   background: rgba(255, 255, 255, 0.08);
   border-color: var(--accent);
   transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .quick-info .resume-button i {
@@ -215,6 +216,7 @@ nav {
 .currently-reading:hover {
   background: rgba(0, 0, 0, 0.6);
   transform: translateY(-2px);
+  border-color: var(--accent);
 }
 
 .album-image {
@@ -337,6 +339,7 @@ nav {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent);
   transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 /* Bio Section */
@@ -360,10 +363,7 @@ nav {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.bio-section:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
-}
+
 
 .bio-content {
   padding: 2.5rem;
@@ -387,14 +387,16 @@ nav {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
   margin-top: 2rem;
   width: 100%;
 }
 
 .project-card {
-  background: var(--card-bg);
+  width: 600px; /* Set a fixed width for the cards */
+  height: 200px; /* Set a fixed height for the cards */
+  background-color: var(--card-bg);
   border-radius: 1rem;
   padding: 1.5rem;
   color: var(--text-light);
@@ -405,7 +407,8 @@ nav {
 .project-card:hover {
   transform: translateY(-5px);
   border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.6);
+
 }
 
 .project-header {
@@ -416,10 +419,15 @@ nav {
   gap: 1rem;
 }
 
-.project-header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.project-card-link {
+  text-decoration: none; 
+  color: inherit;
+  display: block; 
+}
+
+.project-card-link:hover .project-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.05); 
 }
 
 .project-header h3 {
@@ -435,17 +443,6 @@ nav {
   border-radius: 1rem;
   font-size: 0.8rem;
   white-space: nowrap;
-}
-
-.project-links a {
-  color: var(--text-light);
-  font-size: 1.25rem;
-  transition: var(--transition);
-  padding: 0.5rem;
-}
-
-.project-links a:hover {
-  color: var(--accent);
 }
 
 .tech-stack {
@@ -470,25 +467,7 @@ nav {
   transform: translateY(-2px);
 }
 
-.project-features {
-  list-style: none;
-  margin-top: 1rem;
-}
 
-.project-features li {
-  margin: 0.75rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  line-height: 1.4;
-  color: var(--text-light);
-}
-
-.project-features li::before {
-  content: "→";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-}
 
 /* Experience Section */
 #experience {
@@ -501,15 +480,23 @@ nav {
   margin: 0 auto;
 }
 
+
 .section-content h2 {
   font-size: 3rem;
-  color: var(--text-light);
-  margin-bottom: 2rem;
+  display: inline-block;
   background: linear-gradient(to right, var(--text-light), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+
+  /* Ensure the gradient always covers enough area */
+  background-size: 200% 100%; /* Scale gradient horizontally */
+  background-position: center; /* Align gradient */
 }
+
+
+
+
 
 #experience .timeline {
   position: relative;
@@ -552,6 +539,7 @@ nav {
 #experience .timeline-entry:hover::before {
   transform: scale(1.2);
   background: var(--accent);
+  
 }
 
 #experience .timeline-date {
@@ -572,7 +560,7 @@ nav {
 #experience .timeline-content:hover {
   transform: translateX(10px);
   border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 #experience .timeline-content h3 {
@@ -638,10 +626,11 @@ nav {
 }
 
 .contact-links a:hover {
-  background: rgba(255, 255, 255, 0.1);
   border-color: var(--accent);
   color: var(--accent);
   transform: translateY(-2px);
+  background: rgba(0, 0, 0, 0.6);
+
 }
 
 /* Mobile and Responsive Design */
