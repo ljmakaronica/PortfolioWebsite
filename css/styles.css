@@ -669,38 +669,6 @@ nav {
     width: 200px;
     height: 200px;
   }
-
-  .currently-playing,
-  .currently-reading {
-    position: fixed;
-    right: -340px;
-    width: 400px;
-    margin: 0;
-    max-width: none;
-    height: 70px;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: transform;
-    z-index: 1000;
-  }
-
-  .currently-playing {
-    top: 120px;  /* Align with profile image */
-  }
-
-  .currently-reading {
-    top: 250px;  /* Below the first widget */
-  }
-
-  @keyframes peekIn {
-    0%, 85%, 100% { transform: translateX(0); }
-    90% { transform: translateX(-15px); }
-    95% { transform: translateX(-10px); }
-  }
-
-  .widget-peek {
-    animation: peekIn 5s ease-in-out infinite;  /* Slower animation cycle */
-  }
-  
   .bio-wrapper {
     margin-top: 2rem;
     order: 4;
@@ -715,25 +683,8 @@ nav {
     font-size: 0.65rem;
   }
 
-  .album-image {
-    width: 45px;
-    height: 45px;
-  }
 
-  .book-image {
-    width: 38px;
-    height: 57px;
-  }
 
-  .song-details h3,
-  .book-details h3 {
-    font-size: 0.85rem;
-  }
-
-  .song-details p,
-  .book-details p {
-    font-size: 0.75rem;
-  }
 }
 
 @media (max-width: 768px) {
@@ -915,5 +866,11 @@ nav {
   
   .desktop-hero-content {
     display: none;
+  }
+  .currently-playing{
+    display: none;
+  }
+  .currently-reading{
+    display:none;
   }
 }
