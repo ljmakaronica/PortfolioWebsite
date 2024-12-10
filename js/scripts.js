@@ -1,302 +1,179 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marko Ljuboja - Computer Science Student at DePaul</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-    <meta property="og:image" content="images/IMG_2396.JPEG">
-</head>
-<body>
-    <div class="nav-wrapper">
-        <nav>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <ul class="nav-links">
-                <li>
-                    <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/ljmakaronica" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+document.addEventListener('DOMContentLoaded', () => {
+  // Spotify Player State
+  const playerState = {
+      currentTrack: {
+          title: '',
+          artist: '',
+          albumUrl: '',
+          spotifyUrl: ''
+      },
+      hasPlayedOnce: false
+  };
 
-    <section id="home">
-        <!-- Mobile-first heading that will only show on mobile -->
-        <div class="mobile-hero-heading">
-            <h1>Marko Ljuboja</h1>
-            <p class="subtitle">Junior at DePaul University</p>
-        </div>
+  const CACHE_KEY = 'spotify_track_cache';
+  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-        <!-- Widgets now placed before hero container for better mobile layout -->
-        <div class="currently-playing">
-            <div class="widget-label">Last Played</div>
-            <a href="" id="spotify-link" target="_blank" title="Last song I played!">
-                <div class="now-playing-indicator">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-                <img id="album-image" class="album-image" src="" alt="Album Cover">
-                <div class="song-details">
-                    <h3 id="song-title">Loading...</h3>
-                    <p id="artist-name"></p>
-                </div>
-            </a>
-        </div>
-        
-        <div class="currently-reading">
-            <div class="widget-label">Last Read</div>
-            <a id="goodreads-link" href="https://www.goodreads.com/book/show/28348.Crime_and_Punishment" target="_blank" title="Last book I read!">
-                <div class="book-indicator">
-                    <div class="bookmark"></div>
-                </div>
-                <img src="images/crimeandpunish.jpeg" id="book-image" class="book-image" alt="Crime and Punishment by Fyodor Dostoyevsky">
-                <div class="book-details">
-                    <h3 id="book-title">Crime and Punishment</h3>
-                    <p class="book-author">by Fyodor Dostoyevsky</p>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
-                    </div>
-                </div>
-            </a>
-        </div>
+  // UI Elements
+  const UI = {
+      elements: {
+          songTitle: document.getElementById('song-title'),
+          artistName: document.getElementById('artist-name'),
+          albumImage: document.getElementById('album-image'),
+      },
+      updatePlayer(track) {
+          const widget = document.querySelector('.currently-playing');
+          if (!track) return;
+          const { title, artist, albumUrl, spotifyUrl } = track;
+          if (title !== playerState.currentTrack.title ||
+              artist !== playerState.currentTrack.artist) {
+              this.elements.songTitle.textContent = title;
+              this.elements.artistName.textContent = artist;
+              this.elements.albumImage.src = albumUrl;
+              document.getElementById('spotify-link').href = spotifyUrl;
+              playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
+              playerState.hasPlayedOnce = true;
+          }
+      }
+  };
 
-        <div class="hero-container">
-            <div class="left-column">
-                <div class="profile-image">
-                    <img src="images/IMG_2396.JPEG" alt="Marko Ljuboja">
-                </div>
-                <div class="quick-info">
-                    <p><i class="fas fa-graduation-cap"></i> Computer Science @ DePaul</p>
-                    <p><i class="fas fa-calendar"></i> Graduating Early: November 2025</p>
-                    <p><i class="fas fa-code-branch"></i> Software Development Concentration</p>
-                    <p><i class="fas fa-language"></i> English, Serbian, Spanish</p>
-                    <p class="resume-button">
-                        <a href="/assets/marko-ljuboja-resume.pdf" target="_blank">
-                            <i class="fas fa-external-link-alt"></i>
-                            VIEW RESUME
-                        </a>
-                    </p>
-                </div>
-            </div>
-            
-            <div class="right-column">
-                <!-- Desktop-only heading that will hide on mobile -->
-                <div class="desktop-hero-content">
-                    <h1>Marko Ljuboja</h1>
-                    <p class="subtitle">Junior at DePaul University</p>
-                </div>
-                <div class="tech-proficiency">
-                    <h3>Technical Proficiencies</h3>
-                    <div class="skill-grid">
-                        <div class="skill-category">
-                            <h4>Languages</h4>
-                            <div class="skill-tags">
-                                <span>Java</span>
-                                <span>Python</span>
-                                <span>C/C++</span>
-                                <span>SQL</span>
-                                <span>R</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Web & Mobile</h4>
-                            <div class="skill-tags">
-                                <span>HTML/CSS</span>
-                                <span>JavaScript</span>
-                                <span>React.js</span>
-                                <span>Swift</span>
-                                <span>REST APIs</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                            <h4>Tools</h4>
-                            <div class="skill-tags">
-                                <span>Git</span>
-                                <span>Docker</span>
-                                <span>Unix/Linux</span>
-                                <span>Google Cloud</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  // Cache Functions
+  function getCachedTrack() {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+      try {
+          const { track, timestamp } = JSON.parse(cached);
+          const age = Date.now() - timestamp;
+          if (age > CACHE_DURATION) {
+              localStorage.removeItem(CACHE_KEY);
+              return null;
+          }
+          return track;
+      } catch (error) {
+          console.error('Cache parsing error:', error);
+          localStorage.removeItem(CACHE_KEY);
+          return null;
+      }
+  }
 
-        <div class="bio-wrapper">
-            <div class="bio-section">
-                <div class="bio-content">
-                    <p>I am a third year student at DePaul University pursuing a BS in Computer Science with a Spanish minor, set to graduate early in November 2025. Currently seeking Summer 2025 Software Engineering/Development internship opportunities. I am passionate about building technology that solve real world problems through both academic and personal projects. Outside of CS, I enjoy lifting weights, playing basketball, and listening to music.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  function cacheTrack(track) {
+      if (!track) return;
+      const cacheData = {
+          track,
+          timestamp: Date.now()
+      };
+      localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+  }
 
-    <section id="experience">
-        <div class="section-content">
-            <h2>Experience & Activities</h2>
-            <div class="timeline">
-                <div class="timeline-entry">
-                    <div class="timeline-date">January 2024 - Present</div>
-                    <div class="timeline-content">
-                        <h3>President</h3>
-                        <h4>DePaul Serbian Cultural Club</h4>
-                        <p>Leading cultural events planning and community engagement initiatives</p>
-                    </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="timeline-date">May 2024 - October 2024</div>
-                    <div class="timeline-content">
-                        <h3>Boat Launch Assistant</h3>
-                        <h4>Chicago River Canoe and Kayak</h4>
-                        <p>Managed customer safety, processed transactions, and provided excellent service</p>
-                    </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="timeline-date">January 2023 - January 2024</div>
-                    <div class="timeline-content">
-                        <h3>Service Staff</h3>
-                        <h4>Café Salsa</h4>
-                        <p>Handled customer service in a fast-paced environment</p>
-                    </div>
-                </div>
-                <div class="timeline-entry">
-                    <div class="timeline-date">August 2022 - Present</div>
-                    <div class="timeline-content">
-                        <h3>Member</h3>
-                        <h4>DePaul Computer Science Society</h4>
-                        <p>Participating in hackathons and professional development events</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Spotify API Functions
+  async function getRecentTrack() {
+      const cachedTrack = getCachedTrack();
+      if (cachedTrack) {
+          console.log('Using cached track data');
+          return cachedTrack;
+      }
 
-    <section id="projects">
-        <div class="section-content">
-            <h2>Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>iOS Stem Player</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/ljmakaronica/iOS-Stem-Player" target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <p>Audio processing application that transforms music into manipulatable instrument tracks</p>
-                    <div class="tech-stack">
-                        <span>Swift</span>
-                        <span>Python</span>
-                        <span>Flask</span>
-                        <span>AVAudioPlayer</span>
-                        <span>Demucs</span>
-                    </div>
-                    <ul class="project-features">
-                        <li>Engineered synchronized multi-track playback system using AVAudioPlayer for precise control of separated audio stems</li>
-                        <li>Implemented intuitive touch-based interface with real-time volume controls and synchronized scrubbing across all tracks</li>
-                        <li>Built robust backend processing system using Flask microservice to handle YouTube audio extraction and stem separation</li>
-                        <li>Integrated Demucs neural network model - trained on thousands of songs for accurate audio separation into vocals, bass, drums, and instrumentals</li>
-                        <li>Designed complete audio processing pipeline from YouTube extraction to final playback</li>
-                    </ul>
-                </div>
+      try {
+          const response = await fetch('/api/spotify?action=recent');
+          if (response.status === 429) {
+              const retryAfter = response.headers.get('X-RateLimit-Reset');
+              console.warn(`Rate limited. Try again after ${new Date(parseInt(retryAfter))}`);
+              return null;
+          }
+          if (!response.ok) throw new Error('API request failed');
+          const data = await response.json();
+          const track = data.items[0]?.track;
+          if (track) {
+              const trackData = {
+                  title: track.name,
+                  artist: track.artists.map(artist => artist.name).join(', '),
+                  albumUrl: track.album.images[0].url,
+                  spotifyUrl: track.external_urls.spotify
+              };
+              cacheTrack(trackData);
+              return trackData;
+          }
+      } catch (error) {
+          console.error('Error fetching track:', error);
+      }
+      return null;
+  }
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Foreign Exchange Trading Platform</h3>
-                        <div class="project-header-right">
-                            <div class="project-badge">
-                                <span>Hackathon 3rd Place</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://depaul-northern-trust-hackathon.vercel.app" target="_blank">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <p>Comprehensive FX trading platform with predictive analytics and portfolio management</p>
-                    <div class="tech-stack">
-                        <span>React</span>
-                        <span>Python</span>
-                        <span>Chart.js</span>
-                        <span>LSTM</span>
-                        <span>API Integration</span>
-                    </div>
-                    <ul class="project-features">
-                        <li>Developed a responsive React-based trading interface with real-time currency conversion and trade execution capabilities</li>
-                        <li>Implemented comprehensive portfolio tracking system featuring trade history visualization and performance analytics</li>
-                        <li>Integrated LSTM (Long Short-Term Memory) neural network model for currency exchange rate prediction and trend analysis</li>
-                        <li>Built interactive data visualization system using Chart.js for real-time market data and portfolio performance</li>
-                        <li>Engineered API integration system for real-time exchange rate data and market updates</li>
-                        <li>Created predictive analytics dashboard to identify optimal trading opportunities</li>
-                    </ul>
-                </div>
+  function isCacheExpired() {
+      const cached = getCachedTrack();
+      return !cached;
+  }
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <h3>Fantasy Basketball Draft Tool</h3>
-                        <div class="project-links">
-                            <a href="https://github.com/ljmakaronica/Fantasy-Draft-Tool-for-Sleeper" target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <p>Advanced NBA fantasy basketball analytics tool for draft optimization</p>
-                    <div class="tech-stack">
-                        <span>Python</span>
-                        <span>pandas</span>
-                        <span>NumPy</span>
-                        <span>CLI</span>
-                        <span>Data Analysis</span>
-                    </div>
-                    <ul class="project-features">
-                        <li>Engineered data scraping system to collect and analyze thousands of NBA player statistics using pandas and NumPy</li>
-                        <li>Developed comprehensive scoring engine incorporating performance metrics, injury risk assessment, age-based potential, and positional scarcity analysis</li>
-                        <li>Built automated data pipeline that processes statistics and generates dynamic player rankings optimized for draft strategy</li>
-                        <li>Created interactive CLI with customizable modifier selection for personalized ranking adjustments</li>
-                        <li>Implemented custom filtering system to identify rotation players (20+ minutes) for accurate positional analysis</li>
-                        <li>Designed flexible architecture supporting easy scoring modifications and metric additions for Sleeper league integration</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+  async function updateSpotifyTrack() {
+      const track = await getRecentTrack();
+      UI.updatePlayer(track);
+  }
 
-    <section id="contact">
-        <div class="section-content">
-            <h2>Get In Touch</h2>
-            <div class="contact-info">
-                <p>Currently seeking Summer 2025 Software Engineering/Development internship opportunities</p>
-                <div class="contact-links">
-                    <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/ljmakaronica" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:mljuboja16@gmail.com">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+  // Widget Touch Interaction Setup
+  function setupWidgetInteractions() {
+      const widgets = document.querySelectorAll('.currently-playing, .currently-reading');
+      
+      widgets.forEach(widget => {
+          let startX = 0;
+          let currentTranslate = 0;
+          let isDragging = false;
 
-    <script src="js/scripts.js"></script>
-</body>
-</html>
+          widget.addEventListener('touchstart', (e) => {
+              isDragging = true;
+              startX = e.touches[0].clientX - currentTranslate;
+              widget.style.transition = 'none';
+          });
+
+          widget.addEventListener('touchmove', (e) => {
+              if (!isDragging) return;
+              
+              const currentX = e.touches[0].clientX;
+              const diff = currentX - startX;
+              const translate = Math.min(0, Math.max(-340, diff));
+              
+              widget.style.transform = `translateX(${translate}px)`;
+              currentTranslate = translate;
+          });
+
+          const endDrag = () => {
+              if (!isDragging) return;
+              isDragging = false;
+              widget.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+              widget.style.transform = 'translateX(0)';
+              currentTranslate = 0;
+          };
+
+          widget.addEventListener('touchend', endDrag);
+          widget.addEventListener('touchcancel', endDrag);
+      });
+
+      // Add peek animation class after a delay
+      setTimeout(() => {
+          widgets.forEach(widget => {
+              widget.classList.add('widget-peek');
+          });
+      }, 2000);
+  }
+
+  // Initialize everything
+  updateSpotifyTrack();
+  setupWidgetInteractions();
+
+  // Update when returning to tab AND cache is expired
+  document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && isCacheExpired()) {
+          updateSpotifyTrack();
+      }
+  });
+
+  // Check every 5 mins BUT only if tab is active
+  const updateInterval = setInterval(() => {
+      if (!document.hidden && isCacheExpired()) {
+          updateSpotifyTrack();
+      }
+  }, CACHE_DURATION);
+
+  // Cleanup interval on page unload
+  window.addEventListener('unload', () => {
+      clearInterval(updateInterval);
+  });
+});
