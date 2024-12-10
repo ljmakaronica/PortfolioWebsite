@@ -40,10 +40,10 @@
             <p class="subtitle">Junior at DePaul University</p>
         </div>
 
-        <!-- Widgets placed before hero container -->
+        <!-- Widgets now placed before hero container for better mobile layout -->
         <div class="currently-playing">
             <div class="widget-label">Last Played</div>
-            <div class="widget-content">
+            <a href="" id="spotify-link" target="_blank" title="Last song I played!">
                 <div class="now-playing-indicator">
                     <div class="dot"></div>
                     <div class="dot"></div>
@@ -54,12 +54,12 @@
                     <h3 id="song-title">Loading...</h3>
                     <p id="artist-name"></p>
                 </div>
-            </div>
+            </a>
         </div>
         
         <div class="currently-reading">
             <div class="widget-label">Last Read</div>
-            <div class="widget-content">
+            <a id="goodreads-link" href="https://www.goodreads.com/book/show/28348.Crime_and_Punishment" target="_blank" title="Last book I read!">
                 <div class="book-indicator">
                     <div class="bookmark"></div>
                 </div>
@@ -71,7 +71,7 @@
                         <div class="progress"></div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="hero-container">
@@ -240,8 +240,8 @@
                     <ul class="project-features">
                         <li>Developed a responsive React-based trading interface with real-time currency conversion and trade execution capabilities</li>
                         <li>Implemented comprehensive portfolio tracking system featuring trade history visualization and performance analytics</li>
-                        <li>Integrated LSTM neural network model for currency exchange rate prediction and trend analysis</li>
-                        <li>Built interactive data visualization using Chart.js for real-time market data and portfolio performance</li>
+                        <li>Integrated LSTM (Long Short-Term Memory) neural network model for currency exchange rate prediction and trend analysis</li>
+                        <li>Built interactive data visualization system using Chart.js for real-time market data and portfolio performance</li>
                         <li>Engineered API integration system for real-time exchange rate data and market updates</li>
                         <li>Created predictive analytics dashboard to identify optimal trading opportunities</li>
                     </ul>
@@ -265,12 +265,12 @@
                         <span>Data Analysis</span>
                     </div>
                     <ul class="project-features">
-                        <li>Engineered data scraping system to analyze thousands of NBA player stats with pandas & NumPy</li>
-                        <li>Developed a scoring engine incorporating performance metrics, injury risk, age-based potential, and positional scarcity</li>
-                        <li>Built automated data pipeline generating dynamic player rankings optimized for draft strategy</li>
-                        <li>Created interactive CLI with customizable modifiers for personalized ranking adjustments</li>
-                        <li>Implemented filtering to identify rotation players (20+ minutes) for accurate positional analysis</li>
-                        <li>Designed flexible architecture for easy scoring modifications and additional metrics</li>
+                        <li>Engineered data scraping system to collect and analyze thousands of NBA player statistics using pandas and NumPy</li>
+                        <li>Developed comprehensive scoring engine incorporating performance metrics, injury risk assessment, age-based potential, and positional scarcity analysis</li>
+                        <li>Built automated data pipeline that processes statistics and generates dynamic player rankings optimized for draft strategy</li>
+                        <li>Created interactive CLI with customizable modifier selection for personalized ranking adjustments</li>
+                        <li>Implemented custom filtering system to identify rotation players (20+ minutes) for accurate positional analysis</li>
+                        <li>Designed flexible architecture supporting easy scoring modifications and metric additions for Sleeper league integration</li>
                     </ul>
                 </div>
             </div>
