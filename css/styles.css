@@ -127,6 +127,7 @@ nav {
   text-align: center;
 }
 
+/* Resume button within quick-info */
 .quick-info .resume-button {
   margin-top: 1.5rem;
 }
@@ -157,18 +158,12 @@ nav {
   font-size: 0.8rem;
 }
 
-/* Widget Styles */
-/* CHANGES: 
-   - Removed link styles since we no longer have <a>.
-   - Widgets now start partially off-screen with just the album/book image peeking.
-   - Clicking/tapping the widget toggles expansion.
-*/
-
-.currently-playing, .currently-reading {
+/* Widget Styles - Updated for mobile */
+.currently-playing {
   position: absolute;
   top: 5rem;
-  right: 0; 
-  width: 220px; /* narrower by default so image peeks out */
+  right: 2rem;
+  width: 400px;
   display: flex;
   align-items: center;
   padding: 1rem;
@@ -183,34 +178,43 @@ nav {
   margin-top: 1.5rem;
   height: 82px;
   transition: var(--transition);
-  transform: translateX(calc(100% - 50px)); /* partially hidden off-screen except for a portion of album image */
-  cursor: pointer; /* indicate clickable */
 }
 
 .currently-reading {
+  position: absolute;
   top: 12rem;
+  right: 2rem;
+  width: 400px;
+  display: flex;
+  align-items: center;
+  padding: 0.7rem;
+  border-radius: 1rem;
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  gap: 1rem;
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 1.5rem;
+  height: 82px;
+  transition: var(--transition);
+}
+
+.currently-playing a,
+.currently-reading a {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
 }
 
 .currently-playing:hover,
 .currently-reading:hover {
   background: rgba(0, 0, 0, 0.6);
-  /* Hover can remain subtle */
-}
-
-/* Expanded state shows full info */
-.currently-playing.expanded,
-.currently-reading.expanded {
-  transform: translateX(0);
-  width: 400px; /* full width once expanded */
-}
-
-.widget-content {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  color: inherit;
-  width: 100%;
-  text-decoration: none;
+  transform: translateY(-2px);
 }
 
 .album-image {
@@ -258,6 +262,7 @@ nav {
 .dot:nth-child(2) { animation-delay: 0.2s; }
 .dot:nth-child(3) { animation-delay: 0.4s; }
 
+/* Widget Labels */
 .widget-label {
   position: absolute;
   top: -1.5rem;
@@ -665,15 +670,25 @@ nav {
     height: 200px;
   }
 
-  /* CHANGES: No more sliding interactions, but still show the widget peeking */
   .currently-playing,
   .currently-reading {
-    top: 120px;
-    transform: translateX(calc(100% - 50px));
+    position: fixed;
+    right: -340px;
+    width: 400px;
+    margin: 0;
+    max-width: none;
+    height: 70px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+    z-index: 1000;
+  }
+
+  .currently-playing {
+    top: 120px;  /* Align with profile image */
   }
 
   .currently-reading {
-    top: 250px;
+    top: 250px;  /* Below the first widget */
   }
 
   @keyframes peekIn {
@@ -683,9 +698,9 @@ nav {
   }
 
   .widget-peek {
-    animation: peekIn 5s ease-in-out infinite; 
+    animation: peekIn 5s ease-in-out infinite;  /* Slower animation cycle */
   }
-
+  
   .bio-wrapper {
     margin-top: 2rem;
     order: 4;
@@ -773,7 +788,6 @@ nav {
     padding: 0.8rem;
     height: 65px;
     margin: 0.5rem 0.5rem;
-    width: 220px;
   }
 
   .currently-playing {
@@ -847,8 +861,6 @@ nav {
     padding: 0.6rem;
     height: 60px;
     margin: 0.5rem 0.5rem;
-    width: 180px;
-    transform: translateX(calc(100% - 40px));
   }
 
   .currently-playing {
