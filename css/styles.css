@@ -403,7 +403,6 @@ nav {
 }
 
 .project-card {
-  width: 600px; /* Set a fixed width for the cards */
   height: 200px; /* Set a fixed height for the cards */
   background-color: var(--card-bg);
   border-radius: 1rem;
