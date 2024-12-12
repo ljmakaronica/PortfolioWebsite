@@ -864,7 +864,15 @@ nav {
   .mobile-hero-heading {
     display: block;
   }
-  
+  .mobile-hero-heading h1 {
+    font-size: 3rem;
+    text-align: left;
+  }
+  .mobile-hero-heading p {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+
   .desktop-hero-content {
     display: none;
   }
