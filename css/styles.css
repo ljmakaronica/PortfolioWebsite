@@ -883,3 +883,86 @@ nav {
     display:none;
   }
 }
+
+
+/* iPad Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) {
+    
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .nav-links {
+    gap: 2rem;
+  }
+
+  .profile-image {
+    width: 220px;
+    height: 220px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .quick-info {
+    padding: 1.25rem;
+  }
+
+  .section-content h2 {
+    font-size: 2.75rem;
+  }
+
+  .currently-playing,
+  .currently-reading {
+    width: 350px;
+    padding: 1rem;
+  }
+}
+
+/* iPad Landscape */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) {
+   
+  .hero-container {
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .profile-image {
+    width: 200px;
+    height: 200px;
+  }
+
+  .nav-links {
+    gap: 3rem;
+  }
+}
+
+/* Generic Tablet Breakpoint */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .tech-proficiency .skill-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .timeline {
+    max-width: 700px;
+  }
+}
