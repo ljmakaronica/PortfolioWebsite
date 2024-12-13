@@ -105,7 +105,6 @@ nav {
   height: 240px;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid rgba(255,255,255,0.2);
   box-shadow: 0 0 30px rgba(255,255,255,0.1);
   margin-bottom: 2rem;
 }
@@ -149,7 +148,7 @@ nav {
   border-radius: 2rem;
   color: var(--text-light);
   text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
   font-size: 0.9rem;
   align-items: center;
@@ -183,7 +182,7 @@ nav {
   -webkit-backdrop-filter: blur(10px);
   gap: 1rem;
   z-index: 3;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   margin-top: 1.5rem;
   height: 82px;
@@ -204,7 +203,7 @@ nav {
   -webkit-backdrop-filter: blur(10px);
   gap: 1rem;
   z-index: 3;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   margin-top: 1.5rem;
   height: 82px;
@@ -340,16 +339,10 @@ nav {
   border-radius: 2rem;
   font-size: 0.9rem;
   color: var(--text-light);
-  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: var(--transition);
 }
 
-.skill-tags span:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  background: rgba(0, 0, 0, 0.6);
-}
+
 
 /* Bio Section */
 .bio-wrapper {
@@ -367,7 +360,6 @@ nav {
   border-radius: 1.5rem;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -408,7 +400,7 @@ nav {
   border-radius: 1rem;
   padding: 1.5rem;
   color: var(--text-light);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
 }
 
@@ -466,7 +458,7 @@ nav {
   background: var(--card-bg);
   border-radius: 1rem;
   color: var(--accent);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
 }
 
@@ -561,7 +553,7 @@ nav {
   background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
 }
 
@@ -595,7 +587,6 @@ nav {
 #contact {
   background: var(--section-bg);
   padding: 6rem 2rem;
-  text-align: center;
 }
 
 .contact-info {
@@ -603,7 +594,6 @@ nav {
   border-radius: 1.5rem;
   padding: 2.5rem;
   margin-top: 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
@@ -611,6 +601,7 @@ nav {
   color: var(--text-light);
   font-size: 1.2rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .contact-links {
@@ -626,7 +617,7 @@ nav {
   padding: 0.75rem 1.5rem;
   background: var(--card-bg);
   border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   transition: var(--transition);
   display: flex;
   align-items: center;
