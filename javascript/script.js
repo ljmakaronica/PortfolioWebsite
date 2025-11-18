@@ -7,10 +7,10 @@ const projects = [
         githubLink: "https://github.com/ljmakaronica/serbDictionaryiOSApp",
         liveLink: "https://apps.apple.com/us/app/serbdictionary/id6753670428",
         images: [
-            "assets/images/project-images/serbdictionary/IMG_8739.png",
-            "assets/images/project-images/serbdictionary/IMG_8740.png",
-            "assets/images/project-images/serbdictionary/IMG_8741.png",
-            "assets/images/project-images/serbdictionary/IMG_8742.png"
+            "assets/images/project-images/serbdictionary/IMG_8739.PNG",
+            "assets/images/project-images/serbdictionary/IMG_8740.PNG",
+            "assets/images/project-images/serbdictionary/IMG_8741.PNG",
+            "assets/images/project-images/serbdictionary/IMG_8742.PNG"
         ]
     },
     {
