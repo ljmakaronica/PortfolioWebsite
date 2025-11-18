@@ -1,199 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Marko Ljuboja - Software Engineer</title>
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="css/styles.css" />
-  <meta property="og:image" content="https://markoljuboja.com/images/IMG_2396.JPEG" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marko Ljuboja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-  <div class="container" id="main-container">
-    
-    <!-- LEFT PANEL — Profile -->
-    <aside class="profile">
-      <img src="images/IMG_2396.JPEG" alt="Marko Ljuboja" class="profile-photo">
+    <div class="container">
+        <!-- Main Content Area (4/5 of screen) -->
+        <main class="main-content">
+            <!-- Fixed Name Header -->
+            <header class="name-header">
+                <h1>Marko Ljuboja</h1>
+            </header>
 
-      <h1 class="profile-name-compact">Marko Ljuboja</h1>
+            <!-- Profile View -->
+            <section id="profile-view" class="profile-view active">
+                <div class="profile-container">
+                    <!-- Profile Header with Photo and Name -->
+                    <div class="profile-header">
+                        <img src="assets/images/IMG_2396.JPEG" alt="Marko Ljuboja" class="profile-photo">
+                        <div class="profile-title">
+                            <h1>Marko Ljuboja</h1>
+                            <p class="subtitle">Software Engineer · iOS Developer</p>
+                        </div>
+                    </div>
 
-      <div class="quick-info">
-        <p><i class="fas fa-graduation-cap"></i> B.S. Computer Science — DePaul, Nov 2025</p>
-        <p><i class="fas fa-language"></i> English · Serbian · Spanish</p>
-        <p><i class="fas fa-terminal"></i> Software Development Focus</p>
-      </div>
+                    <!-- Bio Section -->
+                    <div class="profile-bio">
+                        <p>I build and ship polished mobile and web experiences. Recently launched <strong>serbDictionary</strong> on the App Store.</p>
+                        <p class="seeking">Currently seeking new grad software engineering roles.</p>
+                    </div>
 
-      <div class="top-skills">
-        <h4>Top Skills</h4>
-        <div class="skill-tags">
-          <span>Swift</span>
-          <span>Python</span>
-          <span>Java</span>
-          <span>React</span>
-          <span>SQL</span>
-        </div>
-      </div>
+                    <!-- Info Grid -->
+                    <div class="info-grid">
+                        <span><i class="fas fa-graduation-cap"></i> B.S. Computer Science — DePaul, Nov 2025</span>
+                        <span><i class="fas fa-language"></i> English · Serbian · Spanish</span>
+                    </div>
 
-      <div class="profile-links">
-        <a href="/assets/Marko_Ljuboja_Resume_Oct_15_2025.pdf" target="_blank" class="btn"><i class="fas fa-file"></i> Resume</a>
-        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="btn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://github.com/ljmakaronica" target="_blank" class="btn"><i class="fab fa-github"></i></a>
-        <a href="mailto:mljuboja16@gmail.com" class="btn"><i class="fas fa-envelope"></i></a>
-      </div>
-    </aside>
+                    <!-- Skills -->
+                    <div class="skills">
+                        <span>Swift</span>
+                        <span>Python</span>
+                        <span>Java</span>
+                        <span>React</span>
+                    </div>
 
+                    <!-- Links -->
+                    <div class="links">
+                        <a href="/assets/Marko_Ljuboja_Resume_Oct_15_2025.pdf" target="_blank" title="Resume">
+                            <i class="fas fa-file-alt"></i> Resume
+                        </a>
+                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="icon-only" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://github.com/ljmakaronica" target="_blank" class="icon-only" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="mailto:mljuboja16@gmail.com" class="icon-only" title="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
 
-    <!-- CENTER PANEL — Bio (default) -->
-    <section class="profile-main">
-      <h1 class="profile-name">Marko Ljuboja</h1>
-      <p class="profile-subtitle">iOS Developer · Software Engineer · Product Builder</p>
+                    <!-- Widgets Section -->
+                    <div class="widgets-section">
+                        <!-- Spotify Widget -->
+                        <div class="widget-container">
+                            <h3 class="widget-title">LAST PLAYED</h3>
+                            <a href="#" id="spotify-link" target="_blank" class="widget-card">
+                                <div class="now-playing-indicator">
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                    <div class="dot"></div>
+                                </div>
+                                <img id="album-image" src="" alt="Album artwork" class="widget-image">
+                                <div class="widget-info">
+                                    <p id="song-title" class="widget-main-text">Loading...</p>
+                                    <p id="artist-name" class="widget-sub-text">Spotify</p>
+                                </div>
+                            </a>
+                        </div>
 
-      <p class="profile-intro">
-        I build and ship polished mobile and web experiences. Recently launched 
-        <strong>serbDictionary</strong> on the App Store.
-        <br><br>
-        <strong>Currently seeking software engineering new grad roles!</strong>
-      </p>
+                        <!-- Goodreads Widget -->
+                        <div class="widget-container">
+                            <h3 class="widget-title">LAST READ</h3>
+                            <a id="goodreads-link" href="https://www.goodreads.com/book/show/824279.The_Death_of_Ivan_Ilyich_and_Other_Stories" target="_blank" class="widget-card">
+                                <div class="book-indicator">
+                                    <div class="bookmark"></div>
+                                </div>
+                                <img src="assets/images/ivan.png" id="book-image" class="widget-image book-cover" alt="Book cover">
+                                <div class="widget-info">
+                                    <p id="book-title" class="widget-main-text">The Death of Ivan Ilyich and Other Stories</p>
+                                    <p id="book-author" class="widget-sub-text">by Leo Tolstoy</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-      <div class="currently-playing">
-        <span class="widget-label">Last Played</span>
-        <a href="#" id="spotify-link" target="_blank">
-          <div class="now-playing-indicator">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-          </div>
-          <img id="album-image" class="album-image" src="" alt="Album Cover">
-          <div class="song-details">
-            <h3 id="song-title">Loading...</h3>
-            <p id="artist-name"></p>
-          </div>
-        </a>
-      </div>
+            <!-- Project Detail View (hidden by default) -->
+            <section id="project-view" class="project-view">
+                <button class="close-btn" id="close-project"></button>
 
-      <div class="currently-reading">
-        <span class="widget-label">Last Read</span>
-        <a href="https://www.goodreads.com/book/show/1772910.White_Nights" target="_blank">
-          <img src="images/whitenights.jpg" class="book-image" alt="White Nights by Fyodor Dostoyevsky">
-          <div class="book-details">
-            <h3>White Nights</h3>
-            <p>by Fyodor Dostoyevsky</p>
-          </div>
-        </a>
-      </div>
-    </section>
+                <div class="project-container">
+                    <div class="project-left">
+                        <div class="carousel">
+                            <button class="carousel-btn prev" id="prev-btn"></button>
+                            <div class="carousel-container">
+                                <img id="carousel-image" src="" alt="Project screenshot">
+                                <video id="carousel-video" loop muted playsinline style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
+                                    <source src="" type="video/mp4">
+                                </video>
+                                <button class="video-mute-toggle" id="video-mute-toggle" style="display: none;">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                        <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                        <path class="sound-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                                        <line class="mute-x" x1="23" y1="9" x2="17" y2="15"></line>
+                                        <line class="mute-x" x1="17" y1="9" x2="23" y2="15"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                            <button class="carousel-btn next" id="next-btn"></button>
+                            <div class="carousel-dots" id="carousel-dots"></div>
+                        </div>
+                    </div>
 
+                    <div class="project-right">
+                        <h2 id="project-title">Project Title</h2>
 
-    <!-- CENTER PANEL — Project Showcase (active state only) -->
-    <main class="hero">
-      <div class="project-showcase">
-        <button class="close-showcase" aria-label="Close project showcase">
-          <i class="fas fa-times"></i>
-        </button>
-        
-        <div class="showcase-header">
-          <h2 id="showcase-title">Project Title</h2>
-          <p id="showcase-description">Project description</p>
-        </div>
+                        <div class="project-description">
+                            <h3>Description</h3>
+                            <p id="project-description">Project description goes here...</p>
+                        </div>
 
-        <div class="showcase-media">
-          <!-- serbDictionary -->
-          <div class="media-container" data-project="serbdictionary">
-            <div class="screenshot-display portrait"><img src="project-images/serbdictionary/IMG_8739.png" alt="serbDictionary Screenshot 1"></div>
-            <div class="screenshot-display portrait"><img src="project-images/serbdictionary/IMG_8740.png" alt="serbDictionary Screenshot 2"></div>
-            <div class="screenshot-display portrait"><img src="project-images/serbdictionary/IMG_8741.png" alt="serbDictionary Screenshot 3"></div>
-            <div class="screenshot-display portrait"><img src="project-images/serbdictionary/IMG_8742.png" alt="serbDictionary Screenshot 4"></div>
-          </div>
+                        <div class="project-tech">
+                            <h3>Tech Stack</h3>
+                            <div class="tech-tags" id="project-tech-tags"></div>
+                        </div>
 
-          <!-- iOS Stem Player -->
-          <div class="media-container" data-project="stem-player">
-            <div class="screenshot-display portrait video-display">
-              <video id="stem-player-video" loop playsinline preload="auto" muted>
-                <source src="project-images/stemplayer/stem.mp4" type="video/mp4">
-              </video>
+                        <div class="project-links">
+                            <a id="github-link" href="#" target="_blank" class="project-link">GitHub</a>
+                            <a id="live-link" href="#" target="_blank" class="project-link">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Project Cards Sidebar (1/5 of screen) -->
+        <aside class="projects-sidebar">
+            <h2 class="sidebar-title">Projects</h2>
+            <p class="sidebar-subtitle">Tap for details</p>
+            <div class="project-cards">
+                <!-- Project Card 1 -->
+                <div class="project-card" data-project="0" title="serbDictionary">
+                    <h3>serbDictionary</h3>
+                    <p class="project-card-desc">Serbian-English iOS dictionary app</p>
+                    <div class="project-card-tech">
+                        <span class="tech-tag-small">SwiftUI</span>
+                        <span class="tech-tag-small">SQLite</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card" data-project="1" title="iOS Stem Player">
+                    <h3>iOS Stem Player</h3>
+                    <p class="project-card-desc">Audio separation tool with ML</p>
+                    <div class="project-card-tech">
+                        <span class="tech-tag-small">Swift</span>
+                        <span class="tech-tag-small">Python</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card" data-project="2" title="Forex Platform">
+                    <h3>Forex Platform</h3>
+                    <p class="project-card-desc">Trading app with LSTM predictions</p>
+                    <div class="project-card-tech">
+                        <span class="tech-tag-small">React</span>
+                        <span class="tech-tag-small">LSTM</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="project-card" data-project="3" title="NBA Schedule">
+                    <h3>NBA Schedule</h3>
+                    <p class="project-card-desc">Real-time NBA scores & schedules</p>
+                    <div class="project-card-tech">
+                        <span class="tech-tag-small">JavaScript</span>
+                        <span class="tech-tag-small">API</span>
+                    </div>
+                </div>
+
+                <!-- Project Card 5 -->
+                <div class="project-card" data-project="4" title="NowOrNever">
+                    <h3>NowOrNever</h3>
+                    <p class="project-card-desc">Food waste prevention platform</p>
+                    <div class="project-card-tech">
+                        <span class="tech-tag-small">React</span>
+                        <span class="tech-tag-small">AI</span>
+                    </div>
+                </div>
             </div>
-            <button class="video-audio-toggle" id="audio-toggle" aria-label="Toggle audio">
-              <i class="fas fa-volume-mute"></i>
-            </button>
-          </div>
+        </aside>
+    </div>
 
-          <!-- Forex Platform -->
-          <div class="media-container" data-project="forex">
-            <div class="screenshot-display landscape"><img src="project-images/forex/forex1.png" alt="Forex Platform Screenshot 1"></div>
-            <div class="screenshot-display landscape"><img src="project-images/forex/forex2.png" alt="Forex Platform Screenshot 2"></div>
-            <div class="screenshot-display landscape"><img src="project-images/forex/forex3.png" alt="Forex Platform Screenshot 3"></div>
-          </div>
-
-          <!-- NBA Schedule -->
-          <div class="media-container" data-project="nba">
-            <div class="screenshot-display landscape"><img src="project-images/nbaschedule/nbascreenshot.png" alt="NBA Schedule Screenshot"></div>
-          </div>
-
-          <!-- Food Waste -->
-          <div class="media-container" data-project="food-waste">
-            <div class="screenshot-display landscape"><img src="project-images/nowornever/nowornever1.png" alt="NowOrNever Screenshot 1"></div>
-            <div class="screenshot-display landscape"><img src="project-images/nowornever/nowornever2.png" alt="NowOrNever Screenshot 2"></div>
-            <div class="screenshot-display landscape"><img src="project-images/nowornever/nowornever3.png" alt="NowOrNever Screenshot 3"></div>
-            <div class="screenshot-display landscape"><img src="project-images/nowornever/nowornever4.png" alt="NowOrNever Screenshot 4"></div>
-          </div>
-        </div>
-
-        <div class="showcase-links"></div>
-      </div>
-    </main>
-
-
-    <!-- RIGHT PANEL — Projects -->
-    <section class="projects">
-      <h3>Projects</h3>
-      <div class="project-grid">
-
-        <div class="project" data-project="serbdictionary"
-          data-github="https://github.com/ljmakaronica/serbDictionaryiOSApp"
-          data-appstore="https://apps.apple.com/us/app/serbdictionary/id6753670428">
-          <h4>serbDictionary</h4>
-          <p>iOS app translating Serbian ↔ English. Includes search, example sentences, and word-of-the-day widget.</p>
-          <div class="stack"><span>SwiftUI</span><span>SQLite</span><span>WidgetKit</span></div>
-        </div>
-
-        <div class="project" data-project="stem-player"
-          data-github="https://github.com/ljmakaronica/iOS-Stem-Player">
-          <h4>iOS Stem Player</h4>
-          <p>Audio separation and playback tool leveraging ML-based Demucs model.</p>
-          <div class="stack"><span>Swift</span><span>Python</span><span>Flask</span><span>Machine Learning</span></div>
-        </div>
-
-        <div class="project" data-project="forex"
-          data-github="https://github.com/RichardLechko/depaul-northern-trust-hackathon"
-          data-website="https://depaul-northern-trust-hackathon.vercel.app">
-          <h4>Forex Platform</h4>
-          <p>Predictive FX trading web app. <strong>3rd Place — Northern Trust Hackathon</strong>.</p>
-          <div class="stack"><span>React</span><span>Python</span><span>LSTM</span></div>
-        </div>
-
-        <div class="project" data-project="nba"
-          data-github="https://github.com/ljmakaronica/NBAScoresWebsite"
-          data-website="https://2024-25-nba-scores.vercel.app">
-          <h4>NBA Schedule</h4>
-          <p>Web app displaying real-time NBA scores and schedules.</p>
-          <div class="stack"><span>HTML</span><span>CSS</span><span>API</span></div>
-        </div>
-
-        <div class="project" data-project="food-waste"
-          data-github="https://github.com/RichardLechko/IIT-Hackathon"
-          data-website="https://iit-hackathon.vercel.app">
-          <h4>NowOrNever</h4>
-          <p>React website connecting restaurants to customers for last-minute purchases. Features AI food analysis and Supabase backend.</p>
-          <div class="stack"><span>React</span><span>AI</span><span>SupaBase</span></div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-  <script src="js/scripts.js"></script>
+    <script src="javascript/script.js"></script>
 </body>
 </html>
