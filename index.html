@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marko Ljuboja</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Main Content Area (4/5 of screen) -->
@@ -30,7 +35,9 @@
 
                     <!-- Bio Section -->
                     <div class="profile-bio">
-                        <p>I build and ship polished mobile and web experiences. Recently launched <strong>serbDictionary</strong> on the App Store.</p>
+                        <p>I build and ship polished mobile and web experiences. Recently launched
+                            <strong>serbDictionary</strong> on the App Store.
+                        </p>
                         <p class="seeking">Currently seeking new grad software engineering roles.</p>
                     </div>
 
@@ -51,9 +58,10 @@
                     <!-- Links -->
                     <div class="links">
                         <a href="/assets/Marko_Ljuboja_Resume_Oct_15_2025.pdf" target="_blank" title="Resume">
-                            <i class="fas fa-file-alt"></i> Resume
+                            Resume
                         </a>
-                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="icon-only" title="LinkedIn">
+                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="icon-only"
+                            title="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
                         <a href="https://github.com/ljmakaronica" target="_blank" class="icon-only" title="GitHub">
@@ -86,13 +94,17 @@
                         <!-- Goodreads Widget -->
                         <div class="widget-container">
                             <h3 class="widget-title">LAST READ</h3>
-                            <a id="goodreads-link" href="https://www.goodreads.com/book/show/824279.The_Death_of_Ivan_Ilyich_and_Other_Stories" target="_blank" class="widget-card">
+                            <a id="goodreads-link"
+                                href="https://www.goodreads.com/book/show/824279.The_Death_of_Ivan_Ilyich_and_Other_Stories"
+                                target="_blank" class="widget-card">
                                 <div class="book-indicator">
                                     <div class="bookmark"></div>
                                 </div>
-                                <img src="assets/images/ivan.png" id="book-image" class="widget-image book-cover" alt="Book cover">
+                                <img src="assets/images/ivan.png" id="book-image" class="widget-image book-cover"
+                                    alt="Book cover">
                                 <div class="widget-info">
-                                    <p id="book-title" class="widget-main-text">The Death of Ivan Ilyich and Other Stories</p>
+                                    <p id="book-title" class="widget-main-text">The Death of Ivan Ilyich and Other
+                                        Stories</p>
                                     <p id="book-author" class="widget-sub-text">by Leo Tolstoy</p>
                                 </div>
                             </a>
@@ -107,15 +119,16 @@
 
                 <div class="project-container">
                     <div class="project-left">
-                        <div class="carousel">
-                            <button class="carousel-btn prev" id="prev-btn"></button>
-                            <div class="carousel-container">
-                                <img id="carousel-image" src="" alt="Project screenshot">
-                                <video id="carousel-video" loop muted playsinline style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
+                        <div class="project-media">
+                            <div class="media-container">
+                                <img id="project-image" src="" alt="Project screenshot">
+                                <video id="project-video" loop muted playsinline
+                                    style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
                                     <source src="" type="video/mp4">
                                 </video>
                                 <button class="video-mute-toggle" id="video-mute-toggle" style="display: none;">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
                                         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
                                         <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
                                         <path class="sound-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
@@ -124,8 +137,6 @@
                                     </svg>
                                 </button>
                             </div>
-                            <button class="carousel-btn next" id="next-btn"></button>
-                            <div class="carousel-dots" id="carousel-dots"></div>
                         </div>
                     </div>
 
@@ -133,18 +144,18 @@
                         <h2 id="project-title">Project Title</h2>
 
                         <div class="project-description">
-                            <h3>Description</h3>
                             <p id="project-description">Project description goes here...</p>
                         </div>
 
                         <div class="project-tech">
-                            <h3>Tech Stack</h3>
                             <div class="tech-tags" id="project-tech-tags"></div>
                         </div>
 
                         <div class="project-links">
-                            <a id="github-link" href="#" target="_blank" class="project-link">GitHub</a>
-                            <a id="live-link" href="#" target="_blank" class="project-link">Live Demo</a>
+                            <a id="github-link" href="#" target="_blank" rel="noopener noreferrer"
+                                class="project-link">GitHub</a>
+                            <a id="live-link" href="#" target="_blank" rel="noopener noreferrer"
+                                class="project-link">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -196,6 +207,7 @@
                     <h3>NBA Schedule</h3>
                     <p class="project-card-desc">Real-time NBA scores & schedules</p>
                     <div class="project-card-tech">
+                        <span class="tech-tag-small">HTML/CSS</span>
                         <span class="tech-tag-small">JavaScript</span>
                         <span class="tech-tag-small">API</span>
                     </div>
@@ -217,4 +229,5 @@
 
     <script src="javascript/script.js"></script>
 </body>
+
 </html>
