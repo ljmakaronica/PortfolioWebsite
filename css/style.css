@@ -739,38 +739,170 @@ body {
 /* Upper bound 1512px covers 13" MacBook at various scaling options */
 @media (min-width: 1180px) and (max-width: 1512px) {
 
+    /* Compact profile layout to prevent scrolling */
+    .profile-view {
+        padding: 1.5rem 3rem;
+    }
+
+    .profile-header {
+        margin-bottom: 1rem;
+        gap: 1.5rem;
+    }
+
+    .profile-photo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .profile-title h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .profile-title .subtitle {
+        font-size: 1rem;
+    }
+
+    .profile-bio {
+        margin-bottom: 1rem;
+    }
+
+    .profile-bio p {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-grid {
+        margin-bottom: 1rem;
+        gap: 0.3rem;
+    }
+
+    .info-grid span {
+        font-size: 0.9rem;
+    }
+
+    .skills {
+        margin: 1rem 0;
+        gap: 0.5rem;
+    }
+
+    .skills span {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+    }
+
+    .links {
+        margin: 1rem 0;
+        gap: 0.5rem;
+    }
+
+    .links a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .links a.icon-only {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+
+    .widgets-section {
+        margin-top: 1rem;
+    }
+
+    .widget-container {
+        margin-bottom: 0.5rem;
+    }
+
+    .widget-card {
+        padding: 0.75rem;
+        max-width: 600px;
+    }
+
+    .widget-image {
+        width: 50px;
+        height: 50px;
+    }
+
+    .widget-image.book-cover {
+        width: 38px;
+        height: 57px;
+    }
+
+    .widget-main-text {
+        font-size: 0.9rem;
+    }
+
+    .widget-sub-text {
+        font-size: 0.8rem;
+    }
+
+    /* Compact sidebar to prevent scrolling */
+    .projects-sidebar {
+        padding: 1rem 0.75rem;
+    }
+
+    .sidebar-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .sidebar-subtitle {
+        font-size: 0.7rem;
+        margin-bottom: 1rem;
+    }
+
+    .project-cards {
+        gap: 0.6rem;
+    }
+
+    .project-card {
+        padding: 0.9rem;
+    }
+
+    .project-card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .project-card-desc {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    .tech-tag-small {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.7rem;
+    }
+
     /* Compact layout for 13" screens */
     .project-container {
         gap: 3rem;
-        /* Smaller than 16" (8rem) but larger than tablets (2rem) */
     }
 
     .project-left {
         width: 550px;
-        /* Reduced from 700px */
     }
 
     .project-right {
         width: 400px;
-        /* Reduced from 450px */
     }
 
     /* Desktop media dimensions */
     .project-media {
         height: 330px;
-        /* Reduced from 420px */
     }
 
     .media-container {
         width: 550px;
-        /* Match project-left */
         height: 330px;
     }
 
     /* Phone media dimensions */
     .project-media.phone-media {
         width: 280px;
-        /* Reduced from 320px */
         height: 560px;
     }
 
@@ -783,7 +915,6 @@ body {
     @media (hover: hover) and (pointer: fine) {
         .media-container:hover {
             transform: scale(1.3);
-            /* Slightly less than 16" (1.4x) */
         }
     }
 }
