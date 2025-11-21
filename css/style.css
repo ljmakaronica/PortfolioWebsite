@@ -735,7 +735,9 @@ body {
 }
 
 /* 13" Screen Layout (MacBook 13" & iPad 13") */
-@media (min-width: 1280px) and (max-width: 1440px) {
+/* Extended range: 1180px handles Safari with multiple tabs on 13" MacBook */
+/* Upper bound 1512px covers 13" MacBook at various scaling options */
+@media (min-width: 1180px) and (max-width: 1512px) {
 
     /* Compact layout for 13" screens */
     .project-container {
@@ -787,9 +789,9 @@ body {
 }
 
 /* Tablet Responsive (iPad 11", Mini, and smaller) */
-@media (max-width: 1279px) {
+@media (max-width: 1179px) {
 
-    /* Increased from 1024px to include iPad 11" Landscape */
+    /* Matches the 13" breakpoint min-width for seamless transition */
     .profile-container {
         padding: 2rem;
     }
