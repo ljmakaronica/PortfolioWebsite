@@ -60,21 +60,24 @@ body {
 .profile-view {
     display: none;
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
+    /* Allow scrolling */
     padding: 3rem 4rem;
 }
 
 .profile-view.active {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; Removed to prevent cut-off on overflow */
 }
 
 .profile-container {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100%;
+    /* Ensure it takes full height */
     justify-content: center;
+    /* Center if space allows */
     gap: 0;
 }
 
@@ -370,6 +373,7 @@ body {
     display: none;
     height: 100%;
     overflow: hidden;
+    /* Original: no scrolling on desktop */
 }
 
 .project-view.active {
@@ -378,6 +382,7 @@ body {
 
 .close-btn {
     position: absolute;
+    /* Original: absolute positioning */
     top: 2rem;
     right: 2rem;
     background: var(--card-bg);
@@ -422,27 +427,29 @@ body {
 
 .project-container {
     position: absolute;
+    /* Original: centered with absolute positioning */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     gap: 8rem;
+    /* Original: 8rem gap */
 }
 
 .project-left {
     flex-shrink: 0;
     overflow: visible;
     width: 700px;
-    /* Fixed width to match widest asset */
+    /* Original: fixed 700px */
     display: flex;
     justify-content: center;
-    /* Center smaller assets (phone) within this space */
     align-items: center;
 }
 
 .project-right {
     width: 450px;
+    /* Original: fixed 450px */
     flex-shrink: 0;
 }
 
@@ -458,8 +465,9 @@ body {
 /* Project Media */
 .project-media {
     position: relative;
-    overflow: visible;
-    /* margin-left removed as we are centering with flexbox in parent */
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .media-container {
@@ -467,22 +475,30 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: auto;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0s;
+    z-index: 1;
+    cursor: zoom-in;
 }
 
 .media-container img {
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
     object-fit: contain;
     border-radius: 12px;
+    display: block;
 }
 
 .media-container video {
+    max-width: 100%;
+    height: auto;
     border-radius: 12px;
+    display: block;
 }
 
 /* Desktop media (projects 2, 3, 4) */
 .project-media {
-    /* width: 700px; Removed to allow flex centering */
     height: 420px;
 }
 
@@ -492,6 +508,10 @@ body {
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0s;
     z-index: 1;
     cursor: zoom-in;
+}
+
+.project-media:not(.phone-media) .media-container {
+    aspect-ratio: 16/9;
 }
 
 /* Hover effect for desktop */
@@ -514,9 +534,15 @@ body {
     height: 640px;
 }
 
+.project-media.phone-media {
+    max-width: 320px;
+    margin: 0 auto;
+}
+
 .project-media.phone-media .media-container {
     width: 320px;
     height: 640px;
+    aspect-ratio: 9/19.5;
 }
 
 .project-media.phone-media .media-container img,
@@ -708,8 +734,62 @@ body {
     border-color: var(--card-border);
 }
 
-/* Tablet Responsive */
-@media (max-width: 1024px) {
+/* 13" Screen Layout (MacBook 13" & iPad 13") */
+@media (min-width: 1280px) and (max-width: 1440px) {
+
+    /* Compact layout for 13" screens */
+    .project-container {
+        gap: 3rem;
+        /* Smaller than 16" (8rem) but larger than tablets (2rem) */
+    }
+
+    .project-left {
+        width: 550px;
+        /* Reduced from 700px */
+    }
+
+    .project-right {
+        width: 400px;
+        /* Reduced from 450px */
+    }
+
+    /* Desktop media dimensions */
+    .project-media {
+        height: 330px;
+        /* Reduced from 420px */
+    }
+
+    .media-container {
+        width: 550px;
+        /* Match project-left */
+        height: 330px;
+    }
+
+    /* Phone media dimensions */
+    .project-media.phone-media {
+        width: 280px;
+        /* Reduced from 320px */
+        height: 560px;
+    }
+
+    .project-media.phone-media .media-container {
+        width: 280px;
+        height: 560px;
+    }
+
+    /* Hover effect only for non-touch devices (MacBook) */
+    @media (hover: hover) and (pointer: fine) {
+        .media-container:hover {
+            transform: scale(1.3);
+            /* Slightly less than 16" (1.4x) */
+        }
+    }
+}
+
+/* Tablet Responsive (iPad 11", Mini, and smaller) */
+@media (max-width: 1279px) {
+
+    /* Increased from 1024px to include iPad 11" Landscape */
     .profile-container {
         padding: 2rem;
     }
@@ -730,10 +810,75 @@ body {
     .profile-title .subtitle {
         font-size: 1.1rem;
     }
+
+    /* Override project view for tablets */
+    .project-view {
+        width: 100%;
+        overflow-y: auto;
+        padding: 2rem;
+        position: relative;
+    }
+
+    .close-btn {
+        position: sticky;
+        top: 1rem;
+        margin-left: auto;
+        display: block;
+        margin-bottom: -3rem;
+        right: 0;
+    }
+
+    .project-container {
+        position: static;
+        transform: none;
+        min-height: 100%;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        padding: 4rem 0;
+    }
+
+    .project-left {
+        flex: 1 1 auto;
+        width: 100%;
+        max-width: 550px;
+        overflow: visible;
+    }
+
+    .project-right {
+        flex: 1 1 350px;
+        max-width: 500px;
+        width: 100%;
+    }
+
+    /* Stack desktop projects for better aesthetics on tablets */
+    .project-container:has(.project-media:not(.phone-media)) {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .project-container:has(.project-media:not(.phone-media)) .project-left {
+        max-width: 900px;
+    }
+
+    .project-container:has(.project-media:not(.phone-media)) .project-right {
+        max-width: 700px;
+        flex-basis: auto;
+    }
+
+    .project-container:has(.project-media:not(.phone-media)) .project-links,
+    .project-container:has(.project-media:not(.phone-media)) .project-tech,
+    .project-container:has(.project-media:not(.phone-media)) .tech-tags {
+        justify-content: center;
+    }
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
+/* Mobile Responsive (Includes Tablets/iPads in Portrait) */
+@media (max-width: 1024px) {
     body {
         overflow: auto;
     }
@@ -866,51 +1011,19 @@ body {
         /* Use dynamic viewport height for mobile */
         background: var(--bg-dark);
         z-index: 200;
-        overflow-y: auto;
         padding: 1rem;
         overscroll-behavior: contain;
         /* Prevent scroll chaining to body */
     }
 
     .project-container {
-        position: static;
-        transform: none;
-        flex-direction: column;
         padding: 4rem 0 2rem;
         gap: 2rem;
     }
 
-    .project-left,
-    .project-right {
-        width: 100%;
-    }
-
-    .project-media:not(.phone-media) {
-        width: 100%;
-        height: auto;
-    }
-
     .project-media:not(.phone-media) .media-container {
-        width: 100%;
-        height: 250px;
-    }
-
-    .project-media.phone-media {
-        width: 100%;
-        max-width: 260px;
         height: auto;
-        margin: 0 auto;
-    }
-
-    .project-media.phone-media .media-container {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 9/19.5;
-    }
-
-    .project-media.phone-media img {
-        width: 100%;
-        height: auto;
+        aspect-ratio: 16/9;
     }
 
     /* Adjust video mute button position on mobile */
@@ -943,6 +1056,119 @@ body {
 
     .sidebar-subtitle {
         text-align: left;
+    }
+}
+
+/* Landscape Tablet Optimization (Short screens) */
+@media (max-width: 1200px) and (max-height: 900px) {
+    .profile-view {
+        padding: 1rem 2rem;
+        /* Reduce vertical padding */
+    }
+
+    .profile-container {
+        justify-content: center;
+    }
+
+    .profile-header {
+        margin-bottom: 1rem;
+        gap: 1rem;
+    }
+
+    .profile-photo {
+        width: 120px;
+        /* Smaller photo */
+        height: 120px;
+    }
+
+    .profile-title h1 {
+        font-size: 2rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .profile-title .subtitle {
+        font-size: 1rem;
+    }
+
+    .profile-bio {
+        margin-bottom: 1rem;
+    }
+
+    .profile-bio p {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .info-grid {
+        margin-bottom: 1rem;
+        gap: 0.25rem;
+    }
+
+    .skills {
+        margin: 1rem 0;
+        gap: 0.5rem;
+    }
+
+    .skills span {
+        padding: 0.3rem 0.8rem;
+    }
+
+    .links {
+        margin: 1rem 0;
+    }
+
+    .widgets-section {
+        margin-top: 1rem;
+    }
+
+    .widget-container {
+        margin-bottom: 0.5rem;
+    }
+
+    .widget-card {
+        padding: 0.75rem;
+    }
+
+    /* Compact Project Sidebar */
+    .projects-sidebar {
+        padding: 1rem 0.5rem;
+    }
+
+    .sidebar-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .sidebar-subtitle {
+        font-size: 0.7rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .project-cards {
+        gap: 0.5rem;
+    }
+
+    .project-card {
+        padding: 0.75rem;
+    }
+
+    .project-card h3 {
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .project-card-desc {
+        font-size: 0.75rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .project-card-tech {
+        gap: 0.25rem;
+    }
+
+    .tech-tag-small {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.65rem;
     }
 }
 
