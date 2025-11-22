@@ -33,7 +33,7 @@ const projects = [
         description: "Web app displaying real-time NBA scores and schedules for the 2025-26 season. Also has game box scores and conference standings. Clean interface with live updates fetched from ESPN.",
         techStack: ["HTML/CSS", "JavaScript", "API"],
         githubLink: "https://github.com/ljmakaronica/NBAScoresWebsite",
-        liveLink: "https://2024-25-nba-scores.vercel.app",
+        liveLink: "https://nba2026.vercel.app",
         video: "assets/images/project-images/nbaschedule/nba.mp4",
         videoMobile: "assets/images/project-images/nbaschedule/nbaMOBILE.mp4",
         images: []
