@@ -2,12 +2,13 @@
  * Fluid Poster-Like Portfolio Layout
  * ===================================
  * Key Changes:
- * - Desktop-perfect mode: @media (min-width: 1400px) and (min-height: 900px)
- * - Responsive/mobile fallback: @media (max-width: 1399px), (max-height: 899px)
+ * - Desktop-perfect mode: @media (min-width: 1366px) and (min-height: 900px)
+ * - Responsive/mobile fallback: @media (max-width: 1365px), (max-height: 899px)
  * - Tablet landscape allowlist: @media (min-width: 900px) and (orientation: landscape) and (min-height: 650px)
  * - All fixed pixel sizes converted to clamp() with vw-based mid values
  * - Hover effects gated behind @media (hover: hover) and (pointer: fine)
  * - Mobile performance: reduced backdrop-filter and glow intensity
+ * - Windows optimizations: custom scrollbars, font rendering, scrollbar-gutter
  * - Preserved all Midnight Glass theme variables and class names
  */
 
@@ -16,6 +17,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 /* Root Variables - Midnight Glass Theme */
@@ -34,6 +37,34 @@
     --glass-blur: blur(12px);
 }
 
+/* Custom Scrollbar Styling - Mac-like discrete scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: rgba(255, 255, 255, 0.4);
+}
+
 /* Base body - defaults to responsive/scrollable */
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -47,6 +78,11 @@ body {
     overflow: auto;
     height: auto;
     min-height: 100vh;
+    scrollbar-gutter: stable;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "liga", "kern";
 }
 
 .container {
@@ -54,7 +90,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    max-width: min(1600px, 92vw);
+    max-width: min(1600px, 96vw);
     margin: 0 auto;
 }
 
@@ -406,9 +442,9 @@ body {
     flex-direction: column;
     align-items: center;
     gap: clamp(1.5rem, 3vw, 2rem);
-    padding: clamp(3rem, 4vw, 4rem) 0;
+    padding: clamp(3rem, 4vw, 4rem) 2rem;
     width: 100%;
-    max-width: min(1600px, 92vw);
+    max-width: min(1600px, 96vw);
     margin: 0 auto;
 }
 
@@ -417,6 +453,7 @@ body {
     overflow: visible;
     width: 100%;
     max-width: clamp(380px, 45vw, 900px);
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -425,6 +462,7 @@ body {
 .project-right {
     width: 100%;
     max-width: clamp(320px, 35vw, 500px);
+    margin: 0 auto;
     flex-shrink: 0;
     text-align: center;
 }
@@ -459,6 +497,7 @@ body {
 
 .media-container img {
     max-width: 100%;
+    width: 100%;
     height: auto;
     object-fit: contain;
     border-radius: clamp(8px, 1vw, 12px);
@@ -467,7 +506,9 @@ body {
 
 .media-container video {
     max-width: 100%;
+    width: 100%;
     height: auto;
+    object-fit: contain;
     border-radius: clamp(8px, 1vw, 12px);
     display: block;
 }
@@ -722,18 +763,20 @@ body {
     }
 
     .project-media:not(.phone-media) .media-container {
-        transform-origin: center center;
+        transform-origin: left center;
     }
 }
 
 /* ===========================================
    DESKTOP PERFECT MODE
    No scrolling, centered poster layout
+   Adjusted to account for Windows scrollbars
    =========================================== */
-@media (min-width: 1400px) and (min-height: 900px) {
+@media (min-width: 1366px) and (min-height: 900px) {
     html, body {
         height: 100vh;
         overflow: hidden;
+        scrollbar-gutter: stable both-edges;
     }
 
     .container {
@@ -830,7 +873,7 @@ body {
    TABLET LANDSCAPE ALLOWLIST
    Allows desktop-like layout on landscape tablets
    =========================================== */
-@media (min-width: 900px) and (orientation: landscape) and (min-height: 650px) and (max-width: 1399px) {
+@media (min-width: 900px) and (orientation: landscape) and (min-height: 650px) and (max-width: 1365px) {
     .container {
         flex-direction: row;
         height: 100vh;
@@ -916,7 +959,7 @@ body {
    RESPONSIVE/MOBILE MODE
    Scrollable stacked layout
    =========================================== */
-@media (max-width: 1399px), (max-height: 899px) {
+@media (max-width: 1365px), (max-height: 899px) {
     /* Ensure scrollable */
     body {
         overflow: auto;
