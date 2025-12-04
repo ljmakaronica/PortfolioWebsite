@@ -229,6 +229,15 @@ projectCards.forEach((card, index) => {
     });
 });
 
+// Handle serbDictionary link in bio
+const serbLink = document.getElementById('serb-link');
+if (serbLink) {
+    serbLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        openProject(0);
+    });
+}
+
 closeBtn.addEventListener('click', closeProject);
 
 // Keyboard navigation

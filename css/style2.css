@@ -222,6 +222,18 @@ body {
     font-weight: 600;
 }
 
+#serb-link {
+    color: var(--text-primary);
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+#serb-link:hover {
+    opacity: 0.7;
+}
+
 /* Info Grid */
 .info-grid {
     display: flex;
