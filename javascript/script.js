@@ -242,6 +242,7 @@ document.addEventListener('keydown', (e) => {
 
 // Video mute toggle
 videoMuteToggle.addEventListener('click', () => {
+    // Toggle mute state
     projectVideo.muted = !projectVideo.muted;
     if (projectVideo.muted) {
         videoMuteToggle.classList.remove('unmuted');
@@ -385,5 +386,38 @@ const updateInterval = setInterval(() => {
 // Cleanup interval on page unload
 window.addEventListener('unload', () => {
     clearInterval(updateInterval);
+});
+
+// ===============================
+// THEME TOGGLE
+// ===============================
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = themeToggle.querySelector('i');
+
+// Check for saved theme preference or system preference
+const savedTheme = localStorage.getItem('theme');
+const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+}
+
+// Toggle theme
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+
+    if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
 });
 

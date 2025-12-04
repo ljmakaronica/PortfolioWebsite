@@ -1,15 +1,18 @@
 /*
  * Fluid Poster-Like Portfolio Layout
  * ===================================
+ * Theme: Soft Japanese/Uniqlo - Warm minimalist with terracotta accents
+ *
  * Key Changes:
- * - Desktop-perfect mode: @media (min-width: 1366px) and (min-height: 900px)
- * - Responsive/mobile fallback: @media (max-width: 1365px), (max-height: 899px)
+ * - Desktop-perfect mode: @media (min-width: 1280px) and (min-height: 700px)
+ * - Responsive/mobile fallback: @media (max-width: 1279px), (max-height: 699px)
  * - Tablet landscape allowlist: @media (min-width: 900px) and (orientation: landscape) and (min-height: 650px)
- * - All fixed pixel sizes converted to clamp() with vw-based mid values
+ * - Vertical spacing uses vh units for responsive scaling across screen heights
+ * - Horizontal spacing uses vw units for responsive width scaling
+ * - Profile photo scales with min(vw, vh) for proportional sizing
  * - Hover effects gated behind @media (hover: hover) and (pointer: fine)
  * - Mobile performance: reduced backdrop-filter and glow intensity
  * - Windows optimizations: custom scrollbars, font rendering, scrollbar-gutter
- * - Preserved all Midnight Glass theme variables and class names
  */
 
 /* CSS Reset */
@@ -18,23 +21,68 @@
     padding: 0;
     box-sizing: border-box;
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+    scrollbar-color: rgba(200, 155, 123, 0.3) transparent;
 }
 
-/* Root Variables - Midnight Glass Theme */
+/* Smooth Theme Transition */
+body,
+body * {
+    transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        border-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        fill 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        stroke 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+        box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Root Variables - Soft Japanese/Uniqlo Theme */
 :root {
-    --text-primary: #FFFFFF;
-    --text-secondary: #B0B0B0;
-    --accent: #00F0FF;
-    --accent-glow: rgba(0, 240, 255, 0.3);
-    --bg-dark: #050510;
-    --bg-gradient: linear-gradient(135deg, #050510 0%, #0a0a20 100%);
-    --card-bg: rgba(255, 255, 255, 0.03);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --card-hover-bg: rgba(255, 255, 255, 0.07);
+    --text-primary: #2C2C2C;
+    --text-secondary: #6B6B6B;
+    --accent: #C89B7B;
+    --accent-glow: rgba(200, 155, 123, 0.25);
+    --bg-dark: #FAF8F5;
+    --bg-gradient: linear-gradient(135deg, #FAF8F5 0%, #F5F1EA 100%);
+    --card-bg: rgba(238, 235, 229, 0.6);
+    --card-border: rgba(217, 214, 208, 0.8);
+    --card-hover-bg: rgba(238, 235, 229, 0.95);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
     --glass-blur: blur(12px);
+}
+
+[data-theme="dark"] {
+    --bg-dark: #1C1C1C;
+    --bg-gradient: linear-gradient(135deg, #1C1C1C 0%, #252525 100%);
+    --text-primary: #EAEAEA;
+    --text-secondary: #A0A0A0;
+    --card-bg: rgba(40, 40, 40, 0.6);
+    --card-border: rgba(60, 60, 60, 0.8);
+    --card-hover-bg: rgba(40, 40, 40, 0.95);
+    --accent-glow: rgba(200, 155, 123, 0.15);
+}
+
+.theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: var(--glass-blur);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(40px, 4vw, 50px);
+    height: clamp(40px, 4vw, 50px);
+    padding: 0;
+    font-size: clamp(1rem, 1.3vw, 1.3rem);
+}
+
+.theme-toggle:hover {
+    background: var(--card-hover-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
 }
 
 /* Custom Scrollbar Styling - Mac-like discrete scrollbars */
@@ -48,26 +96,26 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(200, 155, 123, 0.3);
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(200, 155, 123, 0.5);
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:active {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(200, 155, 123, 0.7);
 }
 
 /* Base body - defaults to responsive/scrollable */
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-size: clamp(14px, 1.3vw, 18px);
     background: var(--bg-dark);
     background-image: var(--bg-gradient);
@@ -112,7 +160,7 @@ body {
     display: none;
     height: auto;
     overflow-y: auto;
-    padding: clamp(1.5rem, 3vw, 4rem);
+    padding: clamp(1rem, 2vh, 4rem);
 }
 
 .profile-view.active {
@@ -133,12 +181,12 @@ body {
     display: flex;
     align-items: center;
     gap: clamp(1rem, 2vw, 2rem);
-    margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+    margin-bottom: clamp(0.75rem, 1.5vh, 1.5rem);
 }
 
 .profile-photo {
-    width: clamp(100px, 9vw, 220px);
-    height: clamp(100px, 9vw, 220px);
+    width: clamp(100px, min(9vw, 11vh), 220px);
+    height: clamp(100px, min(9vw, 11vh), 220px);
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
@@ -160,14 +208,14 @@ body {
 
 /* Bio Section */
 .profile-bio {
-    margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+    margin-bottom: clamp(0.75rem, 1.2vh, 1.5rem);
 }
 
 .profile-bio p {
     color: var(--text-primary);
     font-size: clamp(0.95rem, 1.1vw, 1.2rem);
     line-height: 1.6;
-    margin-bottom: clamp(0.5rem, 0.75vw, 0.75rem);
+    margin-bottom: clamp(0.4rem, 0.6vh, 0.75rem);
 }
 
 .profile-bio .seeking {
@@ -178,8 +226,8 @@ body {
 .info-grid {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.3rem, 0.5vw, 0.5rem);
-    margin-bottom: clamp(1rem, 1.5vw, 1.5rem);
+    gap: clamp(0.25rem, 0.4vh, 0.5rem);
+    margin-bottom: clamp(0.75rem, 1.2vh, 1.5rem);
 }
 
 .info-grid span {
@@ -197,7 +245,7 @@ body {
 .skills {
     display: flex;
     gap: clamp(0.5rem, 0.75vw, 0.75rem);
-    margin: clamp(1rem, 1.5vw, 1.5rem) 0;
+    margin: clamp(0.75rem, 1.2vh, 1.5rem) 0;
     flex-wrap: wrap;
 }
 
@@ -216,7 +264,7 @@ body {
 .links {
     display: flex;
     gap: clamp(0.5rem, 0.75vw, 0.75rem);
-    margin: clamp(1rem, 1.5vw, 1.5rem) 0;
+    margin: clamp(0.75rem, 1.2vh, 1.5rem) 0;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -250,11 +298,11 @@ body {
 
 /* Widgets Section */
 .widgets-section {
-    margin-top: clamp(1rem, 1.5vw, 1.5rem);
+    margin-top: clamp(0.75rem, 1.2vh, 1.5rem);
 }
 
 .widget-container {
-    margin-bottom: clamp(0.5rem, 0.75vw, 0.75rem);
+    margin-bottom: clamp(0.4rem, 0.6vh, 0.75rem);
 }
 
 .widget-title {
@@ -306,10 +354,12 @@ body {
 }
 
 @keyframes wave {
+
     0%,
     100% {
         transform: scaleY(1);
     }
+
     50% {
         transform: scaleY(2);
     }
@@ -407,12 +457,13 @@ body {
     margin-bottom: -3rem;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
-    width: clamp(2.5rem, 3vw, 3rem);
-    height: clamp(2.5rem, 3vw, 3rem);
+    width: clamp(2.5rem, 3.5vw, 3.5rem);
+    height: clamp(2.5rem, 3.5vw, 3.5rem);
     border-radius: 50%;
     cursor: pointer;
     transition: var(--transition);
     z-index: 101;
+    backdrop-filter: var(--glass-blur);
 }
 
 .close-btn::before,
@@ -493,6 +544,8 @@ body {
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0s;
     z-index: 1;
     cursor: zoom-in;
+    overflow: hidden;
+    border-radius: clamp(8px, 1vw, 12px);
 }
 
 .media-container img {
@@ -511,6 +564,10 @@ body {
     object-fit: contain;
     border-radius: clamp(8px, 1vw, 12px);
     display: block;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* Phone media (projects 0, 1) */
@@ -535,8 +592,9 @@ body {
     position: absolute;
     bottom: 1rem;
     right: 1rem;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--card-bg);
     border: 1px solid var(--card-border);
+    backdrop-filter: var(--glass-blur);
     color: var(--text-primary);
     width: clamp(2.5rem, 3.5vw, 3.5rem);
     height: clamp(2.5rem, 3.5vw, 3.5rem);
@@ -547,6 +605,19 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 10;
+    pointer-events: all;
+}
+
+/* Muted state (default) - red filled icon */
+.video-mute-toggle svg {
+    fill: #FF3B30;
+    stroke: #FF3B30;
+}
+
+/* Unmuted state - theme text color */
+.video-mute-toggle.unmuted svg {
+    fill: var(--text-primary);
+    stroke: var(--text-primary);
 }
 
 .video-mute-toggle svg {
@@ -621,7 +692,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border-top: 1px solid var(--card-border);
 }
 
 .sidebar-title {
@@ -683,7 +753,7 @@ body {
 }
 
 .tech-tag-small {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(200, 155, 123, 0.12);
     color: var(--text-secondary);
     padding: clamp(0.2rem, 0.3vw, 0.3rem) clamp(0.4rem, 0.6vw, 0.6rem);
     border-radius: 1rem;
@@ -697,63 +767,60 @@ body {
    =========================================== */
 @media (hover: hover) and (pointer: fine) {
     .skills span:hover {
-        border-color: var(--accent);
         background: var(--card-hover-bg);
-        box-shadow: 0 0 15px var(--accent-glow);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
     }
 
     .links a:hover {
-        border-color: var(--accent);
         background: var(--card-hover-bg);
-        box-shadow: 0 0 15px var(--accent-glow);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         transform: translateY(-2px);
     }
 
     .widget-card:hover {
-        border-color: var(--accent);
         background: var(--card-hover-bg);
-        box-shadow: 0 0 20px var(--accent-glow);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        transform: translateY(-1px);
     }
 
     .tech-tag:hover {
         background: var(--card-hover-bg);
-        border-color: var(--accent);
-        transform: translateY(-2px);
-        box-shadow: 0 0 10px var(--accent-glow);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
     }
 
     .close-btn:hover {
         background: #FF3B30;
         border-color: #FF3B30;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
     .close-btn:hover::before,
     .close-btn:hover::after {
-        background: var(--text-primary);
+        background: #FFFFFF;
     }
 
     .video-mute-toggle:hover {
-        background: var(--accent);
-        border-color: var(--accent);
+        background: var(--card-hover-bg);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
     }
 
     .project-link:hover {
-        border-color: var(--accent);
         background: var(--card-hover-bg);
-        box-shadow: 0 0 15px var(--accent-glow);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
     }
 
     .project-card:hover {
-        border-color: var(--accent);
         background: var(--card-hover-bg);
-        box-shadow: 0 0 20px var(--accent-glow);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
         transform: translateY(-2px);
     }
 
     .tech-tag-small:hover {
         background: var(--card-hover-bg);
         color: var(--text-primary);
-        border-color: var(--card-border);
     }
 
     .media-container:hover {
@@ -770,10 +837,12 @@ body {
 /* ===========================================
    DESKTOP PERFECT MODE
    No scrolling, centered poster layout
-   Adjusted to account for Windows scrollbars
+   Adjusted to account for Windows scrollbars and 13-inch laptops
    =========================================== */
-@media (min-width: 1366px) and (min-height: 900px) {
-    html, body {
+@media (min-width: 1280px) and (min-height: 700px) {
+
+    html,
+    body {
         height: 100vh;
         overflow: hidden;
         scrollbar-gutter: stable both-edges;
@@ -794,7 +863,7 @@ body {
     .profile-view {
         height: 100%;
         overflow-y: auto;
-        padding: clamp(2rem, 3vw, 4rem);
+        padding: clamp(1.5rem, 2.5vh, 4rem);
     }
 
     .profile-view.active {
@@ -843,6 +912,16 @@ body {
 
     .media-container {
         width: clamp(420px, 44vw, 900px);
+        overflow: visible;
+    }
+
+    .video-mute-toggle {
+        position: absolute;
+        left: calc(100% + 2rem);
+        bottom: auto;
+        right: auto;
+        top: 50%;
+        transform: translateY(-50%);
     }
 
     .project-media.phone-media .media-container {
@@ -852,8 +931,6 @@ body {
     /* Sidebar as right column */
     .projects-sidebar {
         flex: 1;
-        border-top: none;
-        border-left: 1px solid var(--card-border);
         padding: clamp(1.5rem, 2vw, 2rem) clamp(0.75rem, 1vw, 1rem);
     }
 
@@ -873,7 +950,7 @@ body {
    TABLET LANDSCAPE ALLOWLIST
    Allows desktop-like layout on landscape tablets
    =========================================== */
-@media (min-width: 900px) and (orientation: landscape) and (min-height: 650px) and (max-width: 1365px) {
+@media (min-width: 900px) and (orientation: landscape) and (min-height: 650px) and (max-width: 1279px) {
     .container {
         flex-direction: row;
         height: 100vh;
@@ -881,7 +958,8 @@ body {
         width: 100vw;
     }
 
-    html, body {
+    html,
+    body {
         height: 100vh;
         overflow: hidden;
     }
@@ -949,8 +1027,6 @@ body {
 
     .projects-sidebar {
         flex: 1;
-        border-top: none;
-        border-left: 1px solid var(--card-border);
         padding: clamp(0.75rem, 1vw, 1rem) clamp(0.5rem, 0.75vw, 0.75rem);
     }
 }
@@ -959,7 +1035,9 @@ body {
    RESPONSIVE/MOBILE MODE
    Scrollable stacked layout
    =========================================== */
-@media (max-width: 1365px), (max-height: 899px) {
+@media (max-width: 1279px),
+(max-height: 699px) {
+
     /* Ensure scrollable */
     body {
         overflow: auto;
@@ -1002,7 +1080,7 @@ body {
    =========================================== */
 @media (max-width: 480px) {
     :root {
-        --accent-glow: rgba(0, 240, 255, 0.12);
+        --accent-glow: rgba(200, 155, 123, 0.15);
         --glass-blur: blur(8px);
     }
 
@@ -1038,7 +1116,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
     :root {
         --transition: none;
-        --accent-glow: rgba(0, 240, 255, 0.1);
+        --accent-glow: rgba(200, 155, 123, 0.15);
     }
 
     .dot {
