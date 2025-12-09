@@ -25,7 +25,7 @@ const projects = [
         githubLink: "https://github.com/RichardLechko/depaul-northern-trust-hackathon",
         liveLink: "https://depaul-northern-trust-hackathon.vercel.app",
         images: [
-            "assets/images/project-images/forex/forex1.png"
+            "assets/images/project-images/forex/forex1.webp"
         ]
     },
     {
