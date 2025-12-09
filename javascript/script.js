@@ -70,6 +70,7 @@ const projectMedia = document.querySelector('.project-media');
 const projectImage = document.getElementById('project-image');
 const projectVideo = document.getElementById('project-video');
 const videoMuteToggle = document.getElementById('video-mute-toggle');
+const loadingOverlay = document.querySelector('.media-loading-overlay');
 
 // Open project detail view
 function openProject(projectIndex) {
@@ -184,6 +185,10 @@ function closeProject() {
 
 // Setup video
 function setupVideo(videoSrc) {
+    // Show loading overlay
+    loadingOverlay.classList.remove('hidden');
+    projectVideo.classList.remove('loaded');
+
     // Hide image, show video
     projectImage.style.display = 'none';
     projectVideo.style.display = 'block';
@@ -198,8 +203,16 @@ function setupVideo(videoSrc) {
     // Set video source and enable audio
     projectVideo.querySelector('source').src = videoSrc;
     projectVideo.muted = true; // Start muted
+
+    // Hide loading overlay when video is ready
+    projectVideo.addEventListener('loadeddata', function onVideoLoaded() {
+        loadingOverlay.classList.add('hidden');
+        projectVideo.classList.add('loaded');
+        projectVideo.play();
+        projectVideo.removeEventListener('loadeddata', onVideoLoaded);
+    }, { once: true });
+
     projectVideo.load();
-    projectVideo.play();
 
     // Update mute button state
     videoMuteToggle.classList.remove('unmuted');
@@ -207,11 +220,22 @@ function setupVideo(videoSrc) {
 
 // Setup single image
 function setupImage(imageSrc) {
+    // Show loading overlay
+    loadingOverlay.classList.remove('hidden');
+    projectImage.classList.remove('loaded');
+
     // Hide video and mute toggle, show image
     projectVideo.style.display = 'none';
     projectVideo.pause();
     videoMuteToggle.style.display = 'none';
     projectImage.style.display = 'block';
+
+    // Hide loading overlay when image is loaded
+    projectImage.addEventListener('load', function onImageLoaded() {
+        loadingOverlay.classList.add('hidden');
+        projectImage.classList.add('loaded');
+        projectImage.removeEventListener('load', onImageLoaded);
+    }, { once: true });
 
     // Set image
     projectImage.src = imageSrc;

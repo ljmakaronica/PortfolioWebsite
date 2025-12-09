@@ -775,6 +775,59 @@ body {
 }
 
 /* ===========================================
+   MEDIA LOADING STATES
+   Beautiful blurred placeholders while videos/images load
+   =========================================== */
+.media-loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg,
+        rgba(200, 155, 123, 0.08) 0%,
+        rgba(200, 155, 123, 0.04) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.media-loading-overlay.hidden {
+    opacity: 0;
+}
+
+/* Spinner animation */
+.media-loading-spinner {
+    width: clamp(40px, 4vw, 60px);
+    height: clamp(40px, 4vw, 60px);
+    border: 3px solid rgba(200, 155, 123, 0.2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Fade in media when loaded */
+.media-container img,
+.media-container video {
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.media-container img.loaded,
+.media-container video.loaded {
+    opacity: 1;
+}
+
+/* ===========================================
    HOVER EFFECTS - Desktop only (non-touch)
    =========================================== */
 @media (hover: hover) and (pointer: fine) {
