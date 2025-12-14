@@ -2,7 +2,7 @@
 const projects = [
     {
         title: "serbDictionary",
-        description: "iOS app translating Serbian ↔ English with 100,000+ words. Features include search, example sentences, favorites, and a word-of-the-day widget. Built natively with SwiftUI and optimized for offline use with SQLite.",
+        description: "iOS app translating Serbian ↔ English with 100,000+ words. Features include search, example sentences, and a word-of-the-day widget. Built natively with SwiftUI and optimized for offline use with SQLite.",
         techStack: ["SwiftUI", "SQLite", "WidgetKit"],
         githubLink: "https://github.com/ljmakaronica/serbDictionaryiOSApp",
         liveLink: "https://apps.apple.com/us/app/serbdictionary/id6753670428",
