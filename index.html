@@ -29,13 +29,13 @@
                         <img src="assets/images/IMG_2396.JPEG" alt="Marko Ljuboja" class="profile-photo">
                         <div class="profile-title">
                             <h1>Marko Ljuboja</h1>
-                            <p class="subtitle">Software Engineer · iOS Developer</p>
+                            <p class="subtitle">Software Engineer (iOS & Mobile Focus) | DePaul Computer Science Alum</p>
                         </div>
                     </div>
 
                     <!-- Bio Section -->
                     <div class="profile-bio">
-                        <p>Recent college graduate. I build and ship polished mobile and web experiences. Launched
+                        <p>I build and ship polished mobile and web experiences. Launched
                             <a href="/serbDictionary" id="serb-link">serbDictionary</a> on the App Store.
                         </p>
                         <p class="seeking">Currently seeking new grad software engineering roles.</p>
@@ -44,40 +44,41 @@
                     <!-- Info Grid -->
                     <div class="info-grid">
                         <span><i class="fas fa-graduation-cap"></i> B.S. Computer Science — DePaul, Nov 2025</span>
-                        <span><i class="fas fa-language"></i> English · Serbian · Spanish</span>
+                        <span><i class="fas fa-graduation-cap" style="visibility: hidden;"></i> 3.69 GPA · Cum Laude · Spanish Minor</span>
+                        <span><i class="fas fa-location-dot"></i> Chicago, IL</span>
                     </div>
 
-                    <!-- Skills -->
+                    <!-- Skills (temporarily hidden)
                     <div class="skills">
                         <span>Swift</span>
                         <span>Python</span>
                         <span>Java</span>
                         <span>React</span>
                     </div>
+                    -->
 
-                    <!-- Links -->
-                    <div class="links">
-                        <a href="/assets/Marko_Ljuboja_Resume_Oct_15_2025.pdf" target="_blank" title="Resume">
-                            Resume
-                        </a>
-                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="icon-only"
-                            title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/ljmakaronica" target="_blank" class="icon-only" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:mljuboja16@gmail.com" class="icon-only" title="Email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <button id="theme-toggle" class="icon-only theme-toggle" title="Toggle Theme">
-                            <i class="fas fa-moon"></i>
-                        </button>
+                    <!-- CTA + Links -->
+                    <div class="cta-section">
+                        <p class="cta-headline">Let's Connect</p>
+                        <div class="links">
+                            <a href="/assets/Marko_Ljuboja_Resume.pdf" target="_blank" class="cta-button">
+                                Resume
+                            </a>
+                            <a href="mailto:mljuboja16@gmail.com" class="cta-button">
+                                <i class="fas fa-envelope"></i> Email
+                            </a>
+                            <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="cta-button">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="https://github.com/ljmakaronica" target="_blank" class="cta-button">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Widgets Section -->
+                    <!-- Widgets Section (temporarily hidden) -->
+                    <!--
                     <div class="widgets-section">
-                        <!-- Spotify Widget -->
                         <div class="widget-container">
                             <h3 class="widget-title">LAST PLAYED</h3>
                             <a href="#" id="spotify-link" target="_blank" class="widget-card">
@@ -93,8 +94,6 @@
                                 </div>
                             </a>
                         </div>
-
-                        <!-- Goodreads Widget -->
                         <div class="widget-container">
                             <h3 class="widget-title">LAST READ</h3>
                             <a id="goodreads-link"
@@ -113,124 +112,218 @@
                             </a>
                         </div>
                     </div>
+                    -->
                 </div>
-            </section>
 
-            <!-- Project Detail View (hidden by default) -->
-            <section id="project-view" class="project-view">
-                <button class="close-btn" id="close-project"></button>
+                <!-- Experience Section 
+                <div class="experience-section">
+                    <div class="experience-section-header">
+                        <h2>Experience</h2>
+                    </div>
 
-                <div class="project-container">
-                    <div class="project-left">
-                        <div class="project-media">
-                            <div class="media-container">
-                                <div class="media-loading-overlay">
-                                    <div class="media-loading-spinner"></div>
+                    <div class="experience-list">
+                        <article class="experience-item">
+                            <div class="experience-item-top">
+                                <div class="experience-item-left">
+                                    <h3>All Meal Prep</h3>
+                                    <span class="experience-role">Software Engineer (Contract)</span>
                                 </div>
-                                <img id="project-image" src="" alt="Project screenshot">
-                                <video id="project-video" loop muted playsinline
-                                    style="display: none; max-width: 100%; max-height: 100%; object-fit: contain;">
-                                    <source src="" type="video/mp4">
-                                </video>
+                                <span class="experience-dates">December 2025 - Present</span>
                             </div>
-                            <button class="video-mute-toggle" id="video-mute-toggle" style="display: none;">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                    <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                                    <path class="sound-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-                                    <line class="mute-x" x1="23" y1="9" x2="17" y2="15"></line>
-                                    <line class="mute-x" x1="17" y1="9" x2="23" y2="15"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="project-right">
-                        <h2 id="project-title">Project Title</h2>
-
-                        <div class="project-description">
-                            <p id="project-description">Project description goes here...</p>
-                        </div>
-
-                        <div class="project-tech">
-                            <div class="tech-tags" id="project-tech-tags"></div>
-                        </div>
-
-                        <div class="project-links">
-                            <a id="github-link" href="#" target="_blank" rel="noopener noreferrer"
-                                class="project-link">GitHub</a>
-                            <a id="live-link" href="#" target="_blank" rel="noopener noreferrer"
-                                class="project-link">Live Demo</a>
-                        </div>
+                            <div class="experience-item-description">
+                                <p>Working on a React Native mobile ordering app as part of a 3-person team for a high-volume meal prep delivery business. Built and stabilized core commerce flows including checkout and order tracking, and collaborated with a backend developer to integrate REST APIs across authentication, payments, and orders.</p>
+                            </div>
+                            <div class="experience-item-tech">
+                                <span class="tech-tag">React Native</span>
+                                <span class="tech-tag">Stripe</span>
+                                <span class="tech-tag">REST APIs</span>
+                            </div>
+                        </article>
                     </div>
                 </div>
+                -->
+                <!-- Projects Section -->
+                <div class="projects-section">
+                    <div class="projects-section-header">
+                        <h2>Projects</h2>
+                    </div>
+
+                    <div class="projects-list">
+                        <!-- Project: serbDictionary -->
+                        <article class="project-item phone-project">
+                            <div class="project-item-media">
+                                <div class="media-container">
+                                    <video loop muted playsinline autoplay class="project-video-inline">
+                                        <source src="assets/images/project-images/serbdictionary/serb.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="project-item-content">
+                                <h3>serbDictionary</h3>
+                                <p class="project-item-description">iOS app translating Serbian ↔ English with 100,000+ words. Features include search, example sentences, and a word-of-the-day widget. Built natively with SwiftUI and optimized for offline use with SQLite.</p>
+                                <div class="project-item-tech">
+                                    <span class="tech-tag">SwiftUI</span>
+                                    <span class="tech-tag">SQLite</span>
+                                    <span class="tech-tag">WidgetKit</span>
+                                </div>
+                                <div class="project-item-links">
+                                    <a href="https://github.com/ljmakaronica/serbDictionaryiOSApp" target="_blank" class="project-link">GitHub</a>
+                                    <a href="https://apps.apple.com/us/app/serbdictionary/id6753670428" target="_blank" class="project-link"><i class="fab fa-apple"></i> App Store</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project: iOS Stem Player -->
+                        <article class="project-item phone-project">
+                            <div class="project-item-media">
+                                <div class="media-container">
+                                    <video id="stem-player-video" loop muted playsinline autoplay class="project-video-inline">
+                                        <source src="assets/images/project-images/stemplayer/stem.mp4" type="video/mp4">
+                                    </video>
+                                    <button class="video-mute-toggle" id="stem-player-mute-toggle" aria-label="Toggle video mute">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2">
+                                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                            <path class="sound-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                            <path class="sound-waves" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                                            <line class="mute-x" x1="23" y1="9" x2="17" y2="15"></line>
+                                            <line class="mute-x" x1="17" y1="9" x2="23" y2="15"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="project-item-content">
+                                <h3>iOS Stem Player</h3>
+                                <p class="project-item-description">Audio separation and playback tool leveraging the ML-based Demucs model. Upload songs and isolate vocals, drums, bass, and other instruments. Built with Swift frontend connected to Python/Flask backend for ML processing.</p>
+                                <div class="project-item-tech">
+                                    <span class="tech-tag">Swift</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">Flask</span>
+                                    <span class="tech-tag">Demucs</span>
+                                    <span class="tech-tag">ML</span>
+                                </div>
+                                <div class="project-item-links">
+                                    <a href="https://github.com/ljmakaronica/iOS-Stem-Player" target="_blank" class="project-link">GitHub</a>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="project-item">
+                            <div class="project-item-media">
+                                <div class="media-container">
+                                    <video loop muted playsinline autoplay class="project-video-inline">
+                                        <source src="assets/images/project-images/refolio/refolio.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="project-item-content">
+                                <h3>Refolio</h3>
+                                <p class="project-item-description">Full-stack web application that converts uploaded resumes into editable, hosted portfolio websites in under a minute. Built and shipped end-to-end, with authentication, Stripe-based subscription billing, and Cloudflare-powered custom subdomain routing.</p>
+                                <div class="project-item-tech">
+                                    <span class="tech-tag">Next.js</span>
+                                    <span class="tech-tag">Supabase</span>
+                                    <span class="tech-tag">OpenAI</span>
+                                    <span class="tech-tag">Stripe</span>
+                                    <span class="tech-tag">Cloudflare</span>
+                                </div>
+                                <div class="project-item-links">
+                                    <a href="https://github.com/ljmakaronica/refolio" target="_blank" class="project-link">GitHub</a>  
+                                    <a href="https://myrefolio.com" target="_blank" class="project-link">Visit Website</a>
+                                </div>
+                            </div>
+                        </article>
+                        <!-- Project: Forex Platform -->
+                        <article class="project-item">
+                            <div class="project-item-media">
+                                <div class="media-container">
+                                    <img src="assets/images/project-images/forex/forex1.webp" alt="Forex Platform screenshot" class="project-image-inline">
+                                </div>
+                            </div>
+                            <div class="project-item-content">
+                                <h3>Forex Platform</h3>
+                                <p class="project-item-description"><strong>Awarded 3rd Place at the Northern Trust x DePaul Hackathon.</strong> Predictive foreign exchange trading web app using LSTM neural networks. Features real-time currency data visualization and ML-based price predictions.</p>
+                                <div class="project-item-tech">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Python</span>
+                                    <span class="tech-tag">LSTM</span>
+                                </div>
+                                <div class="project-item-links">
+                                    <a href="https://github.com/RichardLechko/depaul-northern-trust-hackathon" target="_blank" class="project-link">GitHub</a>
+                                    <a href="https://depaul-northern-trust-hackathon.vercel.app" target="_blank" class="project-link">Visit Website</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project: NBA Schedule -->
+                        <article class="project-item">
+                            <div class="project-item-media">
+                                <div class="media-container">
+                                    <video loop muted playsinline autoplay class="project-video-inline">
+                                        <source src="assets/images/project-images/nbaschedule/nba.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="project-item-content">
+                                <h3>NBA Schedule</h3>
+                                <p class="project-item-description">Web app displaying real-time NBA scores and schedules for the 2025-26 season. Also has game box scores and conference standings. Clean interface with live updates fetched from ESPN.</p>
+                                <div class="project-item-tech">
+                                    <span class="tech-tag">HTML/CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">API</span>
+                                </div>
+                                <div class="project-item-links">
+                                    <a href="https://github.com/ljmakaronica/NBAScoresWebsite" target="_blank" class="project-link">GitHub</a>
+                                    <a href="https://nba2026.vercel.app" target="_blank" class="project-link">Visit Website</a>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Project: NowOrNever -->
+                        <article class="project-item">
+                            <div class="project-item-media">
+                                <div class="media-container">
+                                    <img src="assets/images/project-images/nowornever/nowornever1.png" alt="NowOrNever screenshot" class="project-image-inline">
+                                </div>
+                            </div>
+                            <div class="project-item-content">
+                                <h3>NowOrNever</h3>
+                                <p class="project-item-description">React web app connecting restaurants to customers for last-minute food purchases, reducing food waste. Features AI-powered food image analysis and real-time inventory management with Supabase backend.</p>
+                                <div class="project-item-tech">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">AI</span>
+                                    <span class="tech-tag">Supabase</span>
+                                </div>
+                                <div class="project-item-links">
+                                    <a href="https://github.com/RichardLechko/IIT-Hackathon" target="_blank" class="project-link">GitHub</a>
+                                    <a href="https://iit-hackathon.vercel.app" target="_blank" class="project-link">Visit Website</a>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+
+                <!-- Footer CTA -->
+                <footer class="footer-cta">
+                    <h2>Let's Connect</h2>
+                    <p>Currently seeking new grad software engineering roles.</p>
+                    <div class="footer-cta-links">
+                        <a href="mailto:mljuboja16@gmail.com" class="cta-button">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="cta-button">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/ljmakaronica" target="_blank" class="cta-button">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </footer>
+
+                <!-- Footer -->
+                <footer class="site-footer">
+                    <p>© 2025 Marko Ljuboja</p>
+                </footer>
             </section>
         </main>
-
-        <!-- Project Cards Sidebar (1/5 of screen) -->
-        <aside class="projects-sidebar">
-            <h2 class="sidebar-title">Projects</h2>
-            <p class="sidebar-subtitle">Tap for project info</p>
-            <div class="project-cards">
-                <!-- Project Card 1 -->
-                <div class="project-card" data-project="0" title="serbDictionary">
-                    <h3>serbDictionary</h3>
-                    <p class="project-card-desc">Serbian-English iOS dictionary app</p>
-                    <div class="project-card-tech">
-                        <span class="tech-tag-small">SwiftUI</span>
-                        <span class="tech-tag-small">SQLite</span>
-                        <span class="tech-tag-small">WidgetKit</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 2 -->
-                <div class="project-card" data-project="1" title="iOS Stem Player">
-                    <h3>iOS Stem Player</h3>
-                    <p class="project-card-desc">Audio separation tool with ML</p>
-                    <div class="project-card-tech">
-                        <span class="tech-tag-small">Swift</span>
-                        <span class="tech-tag-small">Python</span>
-                        <span class="tech-tag-small">Flask</span>
-                        <span class="tech-tag-small">Demucs</span>
-                        <span class="tech-tag-small">ML</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 3 -->
-                <div class="project-card" data-project="2" title="Forex Platform">
-                    <h3>Forex Platform</h3>
-                    <p class="project-card-desc">Trading app with LSTM predictions</p>
-                    <div class="project-card-tech">
-                        <span class="tech-tag-small">React</span>
-                        <span class="tech-tag-small">Python</span>
-                        <span class="tech-tag-small">LSTM</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 4 -->
-                <div class="project-card" data-project="3" title="NBA Schedule">
-                    <h3>NBA Schedule</h3>
-                    <p class="project-card-desc">Real-time NBA scores & standings</p>
-                    <div class="project-card-tech">
-                        <span class="tech-tag-small">HTML/CSS</span>
-                        <span class="tech-tag-small">JavaScript</span>
-                        <span class="tech-tag-small">API</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 5 -->
-                <div class="project-card" data-project="4" title="NowOrNever">
-                    <h3>NowOrNever</h3>
-                    <p class="project-card-desc">Food waste prevention platform</p>
-                    <div class="project-card-tech">
-                        <span class="tech-tag-small">React</span>
-                        <span class="tech-tag-small">AI</span>
-                        <span class="tech-tag-small">Supabase</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
     </div>
 
     <script src="javascript/script.js"></script>
