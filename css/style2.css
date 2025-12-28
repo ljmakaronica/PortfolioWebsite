@@ -1,7 +1,6 @@
 /*
  * Fluid Poster-Like Portfolio Layout
  * ===================================
- * Theme: Soft Japanese/Uniqlo - Warm minimalist with terracotta accents
  *
  * Key Changes:
  * - Desktop-perfect mode: @media (min-width: 1280px) and (min-height: 700px)
@@ -21,7 +20,7 @@
     padding: 0;
     box-sizing: border-box;
     scrollbar-width: thin;
-    scrollbar-color: rgba(200, 155, 123, 0.3) transparent;
+    scrollbar-color: rgba(115, 115, 115, 0.3) transparent;
 }
 
 /* Smooth Theme Transition */
@@ -35,36 +34,41 @@ body * {
         box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Root Variables - Soft Japanese/Uniqlo Theme */
+/* Root Variables - Warm Cream & Teal Theme */
 :root {
-    --text-primary: #2C2C2C;
-    --text-secondary: #6B6B6B;
-    --accent: #C89B7B;
-    --accent-dark: #A67B5B;
-    --accent-glow: rgba(200, 155, 123, 0.25);
-    --bg-dark: #FAF8F5;
-    --bg-gradient: linear-gradient(135deg, #FAF8F5 0%, #F5F1EA 100%);
-    --card-bg: rgba(238, 235, 229, 0.6);
-    --card-border: rgba(217, 214, 208, 0.8);
-    --card-hover-bg: rgba(238, 235, 229, 0.95);
+    --text-primary: #1C1917;
+    --text-secondary: #78716C;
+    --accent: #78716C;
+    --accent-dark: #57534E;
+    --accent-glow: rgba(120, 113, 108, 0.2);
+    --bg-dark: #FFFBF5;
+    --bg-gradient: linear-gradient(135deg, #FFFBF5 0%, #FEF7EC 100%);
+    --card-bg: rgba(254, 247, 236, 0.9);
+    --card-border: rgba(231, 218, 199, 0.8);
+    --card-hover-bg: rgba(254, 243, 228, 0.98);
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
+    --shadow: 0 8px 32px 0 rgba(28, 25, 23, 0.06);
     --glass-blur: blur(12px);
-    --cta-primary: #2C2C2C;
-    --cta-secondary: #C89B7B;
+    --cta-primary: #1C1917;
+    --cta-secondary: #78716C;
+    /* Featured link color - rich charcoal for App Store / View Website */
+    --featured-link-bg: #292524;
+    --featured-link-hover: #1C1917;
 }
 
 [data-theme="dark"] {
-    --bg-dark: #1C1C1C;
-    --bg-gradient: linear-gradient(135deg, #1C1C1C 0%, #252525 100%);
-    --text-primary: #EAEAEA;
-    --text-secondary: #A0A0A0;
-    --card-bg: rgba(40, 40, 40, 0.6);
-    --card-border: rgba(60, 60, 60, 0.8);
-    --card-hover-bg: rgba(40, 40, 40, 0.95);
-    --accent-glow: rgba(200, 155, 123, 0.15);
-    --cta-primary: #C89B7B;
-    --cta-secondary: #A0A0A0;
+    --bg-dark: #0C0A09;
+    --bg-gradient: linear-gradient(135deg, #0C0A09 0%, #1C1917 100%);
+    --text-primary: #FAFAF9;
+    --text-secondary: #A8A29E;
+    --card-bg: rgba(28, 25, 23, 0.9);
+    --card-border: rgba(68, 64, 60, 0.8);
+    --card-hover-bg: rgba(41, 37, 36, 0.98);
+    --accent-glow: rgba(120, 113, 108, 0.15);
+    --cta-primary: #FAFAF9;
+    --cta-secondary: #A8A29E;
+    --featured-link-bg: #FAFAF9;
+    --featured-link-hover: #E7E5E4;
 }
 
 .theme-toggle {
@@ -101,21 +105,21 @@ body * {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: rgba(200, 155, 123, 0.3);
+    background: rgba(115, 115, 115, 0.3);
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgba(200, 155, 123, 0.5);
+    background: rgba(115, 115, 115, 0.5);
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: padding-box;
 }
 
 ::-webkit-scrollbar-thumb:active {
-    background: rgba(200, 155, 123, 0.7);
+    background: rgba(115, 115, 115, 0.7);
 }
 
 /* Base body - defaults to responsive/scrollable */
@@ -334,8 +338,6 @@ body {
     text-align: center;
     padding: clamp(3rem, 6vh, 6rem) clamp(1.5rem, 3vw, 3rem);
     margin-top: clamp(2rem, 4vh, 4rem);
-    border-top: 1px solid var(--card-border);
-    background: linear-gradient(180deg, transparent 0%, var(--card-bg) 100%);
 }
 
 .footer-cta h2 {
@@ -381,7 +383,6 @@ body {
 .site-footer {
     text-align: center;
     padding: clamp(1.5rem, 3vh, 3rem) clamp(1rem, 2vw, 2rem);
-    border-top: 1px solid var(--card-border);
 }
 
 .site-footer p {
@@ -522,7 +523,7 @@ body {
 }
 
 .tech-tag {
-    background: rgba(200, 155, 123, 0.12);
+    background: rgba(115, 115, 115, 0.1);
     color: var(--text-secondary);
     padding: clamp(0.25rem, 0.35vw, 0.35rem) clamp(0.6rem, 0.8vw, 0.8rem);
     border-radius: 0.5rem;
@@ -821,7 +822,7 @@ body {
 }
 
 .project-link {
-    background: var(--card-bg);
+    background: transparent;
     color: var(--text-primary);
     padding: clamp(0.6rem, 0.75vw, 0.75rem) clamp(1rem, 1.5vw, 1.5rem);
     border-radius: 2rem;
@@ -829,8 +830,15 @@ body {
     font-weight: 600;
     transition: var(--transition);
     font-size: clamp(0.8rem, 0.9vw, 0.9rem);
-    border: 1px solid var(--card-border);
+    border: 1.5px solid var(--text-primary);
     backdrop-filter: var(--glass-blur);
+}
+
+/* Featured links - App Store, View Website (stand out with blue) */
+.project-link-featured {
+    background: var(--featured-link-bg);
+    color: #FFFFFF;
+    border: 1px solid var(--featured-link-bg);
 }
 
 /* Mobile: Stack vertically */
@@ -906,6 +914,13 @@ body {
     .project-link:hover {
         background: var(--card-hover-bg);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1px);
+    }
+
+    .project-link-featured:hover {
+        background: var(--featured-link-hover);
+        border-color: var(--featured-link-hover);
+        box-shadow: 0 4px 16px rgba(28, 25, 23, 0.25);
         transform: translateY(-1px);
     }
 
