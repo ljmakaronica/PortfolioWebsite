@@ -709,15 +709,15 @@ body {
     position: absolute;
     bottom: 0.75rem;
     right: 0.75rem;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.55);
     border: none;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     width: clamp(2.25rem, 3vw, 2.75rem);
     height: clamp(2.25rem, 3vw, 2.75rem);
     border-radius: 50%;
     cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -727,110 +727,42 @@ body {
 
 .video-mute-toggle:hover {
     background: rgba(0, 0, 0, 0.75);
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .video-mute-toggle:active {
     transform: scale(0.95);
 }
 
-/* Mute icon container */
-.mute-icon {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-
-/* Speaker SVG */
+/* Icon styling */
 .video-mute-toggle svg {
-    width: clamp(14px, 1.1rem, 16px);
-    height: clamp(14px, 1.1rem, 16px);
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-65%, -50%);
+    width: clamp(16px, 1.25rem, 20px);
+    height: clamp(16px, 1.25rem, 20px);
+    stroke: #fff;
+    fill: none;
 }
 
-.video-mute-toggle .speaker-body {
+.video-mute-toggle svg polygon {
     fill: #fff;
-    transition: fill 0.2s ease;
+    stroke: #fff;
 }
 
-/* Sound bars container */
-.sound-bars {
-    position: absolute;
-    right: clamp(6px, 0.5rem, 8px);
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    height: 12px;
+/* Muted state (default) - show X icon, hide waves icon */
+.video-mute-toggle .icon-unmuted {
+    display: none;
 }
 
-.sound-bars .bar {
-    width: 2px;
-    background: #fff;
-    border-radius: 1px;
-    transform-origin: center;
-    opacity: 0;
-    height: 0;
-    transition: all 0.3s ease;
+.video-mute-toggle .icon-muted {
+    display: block;
 }
 
-.sound-bars .bar-1 { height: 6px; }
-.sound-bars .bar-2 { height: 10px; }
-.sound-bars .bar-3 { height: 4px; }
-
-/* Mute slash - diagonal line across speaker */
-.mute-slash {
-    position: absolute;
-    width: 2px;
-    height: clamp(18px, 1.4rem, 22px);
-    background: #fff;
-    border-radius: 1px;
-    transform: rotate(-45deg);
-    opacity: 1;
-    transition: opacity 0.2s ease;
-    left: 50%;
-    top: 50%;
-    margin-left: -1px;
-    margin-top: -9px;
+/* Unmuted state - show waves icon, hide X icon */
+.video-mute-toggle.unmuted .icon-unmuted {
+    display: block;
 }
 
-/* Unmuted state - show animated bars, hide slash */
-.video-mute-toggle.unmuted .sound-bars .bar {
-    opacity: 1;
-    animation: soundPulse 0.8s ease-in-out infinite;
-}
-
-.video-mute-toggle.unmuted .sound-bars .bar-1 {
-    animation-delay: 0s;
-}
-
-.video-mute-toggle.unmuted .sound-bars .bar-2 {
-    animation-delay: 0.15s;
-}
-
-.video-mute-toggle.unmuted .sound-bars .bar-3 {
-    animation-delay: 0.3s;
-}
-
-.video-mute-toggle.unmuted .mute-slash {
-    opacity: 0;
-}
-
-/* Sound bar animation */
-@keyframes soundPulse {
-    0%, 100% {
-        transform: scaleY(1);
-    }
-    50% {
-        transform: scaleY(1.4);
-    }
+.video-mute-toggle.unmuted .icon-muted {
+    display: none;
 }
 
 /* Phone-style projects (serbDictionary, iOS Stem Player) */
