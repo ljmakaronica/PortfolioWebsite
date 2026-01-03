@@ -392,6 +392,15 @@ body {
 }
 
 /* Compact Footer Widgets */
+.footer-widgets-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    margin-bottom: 0.5rem;
+}
+
 .footer-widgets {
     display: flex;
     align-items: center;
