@@ -9,7 +9,7 @@ const cache = {
   timestamp: null
 };
 
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const CACHE_DURATION = 30 * 1000; // 30 seconds
 
 // Clean up old rate limit entries every hour
 setInterval(() => {

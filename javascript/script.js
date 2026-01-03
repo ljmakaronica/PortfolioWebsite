@@ -27,12 +27,10 @@ const playerState = {
         artist: '',
         albumUrl: '',
         spotifyUrl: ''
-    },
-    hasPlayedOnce: false
+    }
 };
 
-const CACHE_KEY = 'spotify_track_cache';
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
+const REFRESH_INTERVAL = 30 * 1000; // 30 seconds
 
 // UI Elements
 const spotifyUI = {
@@ -51,47 +49,12 @@ const spotifyUI = {
             this.albumImage.src = albumUrl;
             this.spotifyLink.href = spotifyUrl;
             playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
-            playerState.hasPlayedOnce = true;
         }
     }
 };
 
-// Cache Functions
-function getCachedTrack() {
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (!cached) return null;
-    try {
-        const { track, timestamp } = JSON.parse(cached);
-        const age = Date.now() - timestamp;
-        if (age > CACHE_DURATION) {
-            localStorage.removeItem(CACHE_KEY);
-            return null;
-        }
-        return track;
-    } catch (error) {
-        console.error('Cache parsing error:', error);
-        localStorage.removeItem(CACHE_KEY);
-        return null;
-    }
-}
-
-function cacheTrack(track) {
-    if (!track) return;
-    const cacheData = {
-        track,
-        timestamp: Date.now()
-    };
-    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-}
-
-// Spotify API Functions
+// Spotify API Functions (server handles caching)
 async function getRecentTrack() {
-    const cachedTrack = getCachedTrack();
-    if (cachedTrack) {
-        console.log('Using cached track data');
-        return cachedTrack;
-    }
-
     try {
         const response = await fetch('/api/spotify?action=recent');
         if (response.status === 429) {
@@ -103,24 +66,17 @@ async function getRecentTrack() {
         const data = await response.json();
         const track = data.items[0]?.track;
         if (track) {
-            const trackData = {
+            return {
                 title: track.name,
                 artist: track.artists.map(artist => artist.name).join(', '),
                 albumUrl: track.album.images[0].url,
                 spotifyUrl: track.external_urls.spotify
             };
-            cacheTrack(trackData);
-            return trackData;
         }
     } catch (error) {
         console.error('Error fetching track:', error);
     }
     return null;
-}
-
-function isCacheExpired() {
-    const cached = getCachedTrack();
-    return !cached;
 }
 
 async function updateSpotifyTrack() {
@@ -131,19 +87,19 @@ async function updateSpotifyTrack() {
 // Initialize Spotify widget
 updateSpotifyTrack();
 
-// Update when returning to tab AND cache is expired
+// Refresh when returning to tab
 document.addEventListener('visibilitychange', () => {
-    if (!document.hidden && isCacheExpired()) {
+    if (!document.hidden) {
         updateSpotifyTrack();
     }
 });
 
-// Check every 5 mins BUT only if tab is active
+// Refresh every 5 mins if tab is active
 const updateInterval = setInterval(() => {
-    if (!document.hidden && isCacheExpired()) {
+    if (!document.hidden) {
         updateSpotifyTrack();
     }
-}, CACHE_DURATION);
+}, REFRESH_INTERVAL);
 
 // Cleanup interval on page unload
 window.addEventListener('unload', () => {
