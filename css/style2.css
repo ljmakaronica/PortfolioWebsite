@@ -704,30 +704,35 @@ body {
     border-radius: inherit;
 }
 
-/* Inline video mute toggle (Stem Player only) */
+/* Project media wrapper - needs relative positioning for the mute button */
+.project-item-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(0.75rem, 1.5vw, 1.5rem);
+    position: relative;
+}
+
+/* Inline video mute toggle - styled like GitHub button */
 .video-mute-toggle {
-    position: absolute;
-    bottom: 0.75rem;
-    right: 0.75rem;
-    background: rgba(0, 0, 0, 0.55);
-    border: none;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    width: clamp(2.25rem, 3vw, 2.75rem);
-    height: clamp(2.25rem, 3vw, 2.75rem);
+    background: transparent;
+    border: 1.5px solid var(--text-primary);
+    width: clamp(2.75rem, 3.5vw, 3.25rem);
+    height: clamp(2.75rem, 3.5vw, 3.25rem);
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    flex-shrink: 0;
     padding: 0;
 }
 
 .video-mute-toggle:hover {
-    background: rgba(0, 0, 0, 0.75);
-    transform: scale(1.08);
+    background: var(--card-hover-bg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
 }
 
 .video-mute-toggle:active {
@@ -736,15 +741,15 @@ body {
 
 /* Icon styling */
 .video-mute-toggle svg {
-    width: clamp(16px, 1.25rem, 20px);
-    height: clamp(16px, 1.25rem, 20px);
-    stroke: #fff;
+    width: clamp(18px, 1.4rem, 22px);
+    height: clamp(18px, 1.4rem, 22px);
+    stroke: var(--text-primary);
     fill: none;
 }
 
 .video-mute-toggle svg polygon {
-    fill: #fff;
-    stroke: #fff;
+    fill: var(--text-primary);
+    stroke: var(--text-primary);
 }
 
 /* Muted state (default) - show X icon, hide waves icon */
