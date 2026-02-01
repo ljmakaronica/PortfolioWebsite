@@ -17,6 +17,22 @@ if (stemPlayerVideo && stemPlayerMuteToggle) {
 }
 
 // ===============================
+// MORE PROJECTS TOGGLE
+// ===============================
+const moreProjectsToggle = document.getElementById('more-projects-toggle');
+const moreProjectsList = document.getElementById('more-projects-list');
+const moreProjectsText = moreProjectsToggle?.querySelector('.more-projects-toggle-text');
+
+if (moreProjectsToggle && moreProjectsList) {
+    moreProjectsToggle.addEventListener('click', () => {
+        const isExpanded = moreProjectsList.classList.contains('visible');
+        moreProjectsList.classList.toggle('visible');
+        moreProjectsToggle.classList.toggle('expanded');
+        moreProjectsText.textContent = isExpanded ? 'More Projects' : 'Less Projects';
+    });
+}
+
+// ===============================
 // SPOTIFY WIDGET
 // ===============================
 
