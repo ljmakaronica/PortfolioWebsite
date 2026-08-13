@@ -1,0 +1,63 @@
+/* Optical logo sizing for the Experience section.
+   Keep a shared alignment stage, then size each mark by perceived weight. */
+.experience-company-logo {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: visible;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.experience-company-logo img {
+    display: block;
+    object-fit: contain;
+}
+
+/* Wide wordmark needs more horizontal room to match denser square/circle marks. */
+.experience-company-logo img[alt="Adyen logo"] {
+    width: 72px;
+    height: auto;
+    margin: 0;
+}
+
+/* Dense square icon: slightly smaller than the common stage. */
+.experience-company-logo img[alt="Chowbus logo"] {
+    width: 52px;
+    height: 52px;
+    margin: 0;
+    object-fit: cover;
+    border-radius: 0.65rem;
+}
+
+/* Circular logo gets a touch more breathing room than Chowbus. */
+.experience-company-logo img[alt="All Meal Prep logo"] {
+    width: 49px;
+    height: 49px;
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .experience-company-logo {
+        width: 54px;
+        height: 54px;
+    }
+
+    .experience-company-logo img[alt="Adyen logo"] {
+        width: 62px;
+    }
+
+    .experience-company-logo img[alt="Chowbus logo"] {
+        width: 46px;
+        height: 46px;
+        border-radius: 0.6rem;
+    }
+
+    .experience-company-logo img[alt="All Meal Prep logo"] {
+        width: 44px;
+        height: 44px;
+    }
+}
