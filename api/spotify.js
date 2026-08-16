@@ -1,9 +1,13 @@
 import { Buffer } from 'buffer';
 
-// Rate limiting state
+// ─── Module-level token cache (persists across warm serverless invocations) ───
+let cachedAccessToken = null;
+let cachedRefreshToken = null;
+
+// ─── Rate limiting state ───
 const rateLimitState = new Map();
 
-// Add cache state
+// ─── Track data cache ───
 const cache = {
   recentTrack: null,
   timestamp: null
@@ -27,6 +31,14 @@ function getIP(req) {
          req.headers['x-forwarded-for']?.split(',')[0] ||
          req.connection.remoteAddress ||
          '0.0.0.0';
+}
+
+function getAccessToken() {
+  return cachedAccessToken || process.env.SPOTIFY_ACCESS_TOKEN;
+}
+
+function getRefreshToken() {
+  return cachedRefreshToken || process.env.SPOTIFY_REFRESH_TOKEN;
 }
 
 async function rateLimitMiddleware(req, res) {
@@ -92,11 +104,16 @@ async function getCachedOrFetchTrack() {
   }
 
   // Fetch fresh data
+  const accessToken = getAccessToken();
+  if (!accessToken) {
+    throw new Error('NO_ACCESS_TOKEN');
+  }
+
   const response = await fetch(
     'https://api.spotify.com/v1/me/player/recently-played?limit=1',
     {
       headers: {
-        'Authorization': `Bearer ${process.env.SPOTIFY_ACCESS_TOKEN}`
+        'Authorization': `Bearer ${accessToken}`
       }
     }
   );
@@ -116,6 +133,11 @@ async function getCachedOrFetchTrack() {
 }
 
 async function refreshToken() {
+  const currentRefreshToken = getRefreshToken();
+  if (!currentRefreshToken) {
+    throw new Error('REFRESH_TOKEN_EXPIRED');
+  }
+
   const response = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     headers: {
@@ -124,12 +146,28 @@ async function refreshToken() {
         `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
       ).toString('base64')}`
     },
-    body: `grant_type=refresh_token&refresh_token=${process.env.SPOTIFY_REFRESH_TOKEN}`
+    body: `grant_type=refresh_token&refresh_token=${currentRefreshToken}`
   });
 
   const data = await response.json();
-  if (data.access_token) {
-    process.env.SPOTIFY_ACCESS_TOKEN = data.access_token;
+
+  // Handle expired refresh token (6-month lifetime as of July 2026)
+  if (data.error === 'invalid_grant') {
+    cachedAccessToken = null;
+    cachedRefreshToken = null;
+    throw new Error('REFRESH_TOKEN_EXPIRED');
+  }
+
+  if (!data.access_token) {
+    throw new Error(`Token refresh failed: ${data.error || 'unknown error'}`);
+  }
+
+  // Cache the new access token
+  cachedAccessToken = data.access_token;
+
+  // Save rotated refresh token if Spotify returns one
+  if (data.refresh_token) {
+    cachedRefreshToken = data.refresh_token;
   }
 }
 
@@ -143,22 +181,46 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Retry guard — pulled from query to prevent infinite recursion
+  const isRetry = req.query._retry === '1';
+
   try {
     const action = req.query.action;
 
     switch (action) {
       case 'recent':
         try {
+          // If we have no access token yet, refresh first
+          if (!getAccessToken()) {
+            await refreshToken();
+          }
           const trackData = await getCachedOrFetchTrack();
           return res.status(200).json(trackData);
         } catch (error) {
-          if (error.message.includes('401')) {
-            // Token expired, refresh it
-            await refreshToken();
-            // Clear cache since token was invalid
+          if (error.message === 'REFRESH_TOKEN_EXPIRED') {
+            return res.status(401).json({
+              error: 'REFRESH_TOKEN_EXPIRED',
+              message: 'Spotify refresh token has expired. Re-authorization required.'
+            });
+          }
+          if (error.message.includes('401') && !isRetry) {
+            // Access token expired — refresh and retry once
+            try {
+              await refreshToken();
+            } catch (refreshError) {
+              if (refreshError.message === 'REFRESH_TOKEN_EXPIRED') {
+                return res.status(401).json({
+                  error: 'REFRESH_TOKEN_EXPIRED',
+                  message: 'Spotify refresh token has expired. Re-authorization required.'
+                });
+              }
+              throw refreshError;
+            }
+            // Clear track cache since token was invalid
             cache.recentTrack = null;
             cache.timestamp = null;
-            // Retry the request
+            // Retry once with guard flag
+            req.query._retry = '1';
             return handler(req, res);
           }
           throw error;
@@ -168,7 +230,17 @@ export default async function handler(req, res) {
         // Clear cache when refreshing token
         cache.recentTrack = null;
         cache.timestamp = null;
-        await refreshToken();
+        try {
+          await refreshToken();
+        } catch (error) {
+          if (error.message === 'REFRESH_TOKEN_EXPIRED') {
+            return res.status(401).json({
+              error: 'REFRESH_TOKEN_EXPIRED',
+              message: 'Spotify refresh token has expired. Re-authorization required.'
+            });
+          }
+          throw error;
+        }
         return res.status(200).json({ message: 'Token refreshed' });
 
       default:

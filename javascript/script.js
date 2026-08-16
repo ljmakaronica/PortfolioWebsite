@@ -135,23 +135,43 @@ const spotifyUI = {
         const { title, artist, albumUrl, spotifyUrl } = track;
         if (title !== playerState.currentTrack.title ||
             artist !== playerState.currentTrack.artist) {
-            this.songTitle.textContent = title;
-            this.artistName.textContent = artist;
-            this.albumImage.src = albumUrl;
-            this.spotifyLink.href = spotifyUrl;
+            if (this.songTitle) this.songTitle.textContent = title;
+            if (this.artistName) this.artistName.textContent = artist;
+            if (this.albumImage) this.albumImage.src = albumUrl;
+            if (this.spotifyLink) this.spotifyLink.href = spotifyUrl;
             playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
         }
+    },
+
+    showUnavailable() {
+        if (this.songTitle) this.songTitle.textContent = 'Unavailable';
+        if (this.artistName) this.artistName.textContent = 'Spotify';
+        if (this.albumImage) this.albumImage.style.display = 'none';
     }
 };
 
+// Track whether the refresh token is expired to stop polling
+let spotifyDisabled = false;
+
 // Spotify API Functions (server handles caching)
 async function getRecentTrack() {
+    if (spotifyDisabled) return null;
+
     try {
         const response = await fetch('/api/spotify?action=recent');
         if (response.status === 429) {
             const retryAfter = response.headers.get('X-RateLimit-Reset');
             console.warn(`Rate limited. Try again after ${new Date(parseInt(retryAfter))}`);
             return null;
+        }
+        if (response.status === 401) {
+            const errorData = await response.json().catch(() => ({}));
+            if (errorData.error === 'REFRESH_TOKEN_EXPIRED') {
+                console.warn('Spotify refresh token expired. Widget disabled.');
+                spotifyDisabled = true;
+                spotifyUI.showUnavailable();
+                return null;
+            }
         }
         if (!response.ok) throw new Error('API request failed');
         const data = await response.json();
@@ -180,14 +200,14 @@ updateSpotifyTrack();
 
 // Refresh when returning to tab
 document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
+    if (!document.hidden && !spotifyDisabled) {
         updateSpotifyTrack();
     }
 });
 
-// Refresh every 5 mins if tab is active
+// Refresh every 30s if tab is active
 const updateInterval = setInterval(() => {
-    if (!document.hidden) {
+    if (!document.hidden && !spotifyDisabled) {
         updateSpotifyTrack();
     }
 }, REFRESH_INTERVAL);
