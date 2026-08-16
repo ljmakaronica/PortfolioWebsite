@@ -24,6 +24,9 @@
             border-radius: 0.7rem;
             flex-shrink: 0;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .experience-company-logo img {
@@ -33,6 +36,7 @@
             object-fit: cover;
         }
 
+        /* Clean logo removes background/border radius when the original image is transparent */
         .experience-company-logo.clean-logo {
             border-radius: 0;
             overflow: visible;
@@ -41,9 +45,21 @@
 
         .experience-company-logo.clean-logo img {
             object-fit: contain;
-            width: 90%;
-            height: 90%;
-            margin: 5%;
+            width: 85%;
+            height: 85%;
+        }
+
+        /* Fine-tuning for visual harmony */
+        .experience-company-logo img[alt="Adyen logo"] {
+            width: 110%; /* Adyen is a horizontal wordmark, needs more width to balance a solid block */
+            height: auto;
+            max-width: none;
+            margin-left: -5%; /* Center it */
+        }
+
+        .experience-company-logo img[alt="All Meal Prep logo"] {
+            width: 95%; /* Circular, scale slightly */
+            height: 95%;
         }
 
         @media (max-width: 600px) {
@@ -59,6 +75,25 @@
 <body>
     <div class="container">
         <!-- Main Content Area (4/5 of screen) -->
+        
+            <!-- Top Right Widgets -->
+            <div class="top-right-widgets desktop-only">
+                <a href="#" id="spotify-link" target="_blank" class="top-widget">
+                    <img id="album-image" src="" alt="Album" class="top-widget-img">
+                    <span class="top-widget-text">
+                        <span id="song-title">Loading...</span>
+                        <span id="artist-name">Spotify</span>
+                    </span>
+                </a>
+                <a id="goodreads-link" href="https://www.goodreads.com/book/show/824279.The_Death_of_Ivan_Ilyich_and_Other_Stories" target="_blank" class="top-widget">
+                    <img src="assets/images/ivan.png" id="book-image" alt="Book" class="top-widget-img book">
+                    <span class="top-widget-text">
+                        <span id="book-title">The Death of Ivan Ilyich</span>
+                        <span id="book-author">Leo Tolstoy</span>
+                    </span>
+                </a>
+            </div>
+
         <main class="main-content">
             <!-- Fixed Name Header -->
             <header class="name-header">
@@ -73,18 +108,16 @@
                         <img src="assets/images/IMG_2396.JPEG" alt="Marko Ljuboja" class="profile-photo">
                         <div class="profile-title">
                             <h1>Marko Ljuboja</h1>
-                            <p class="subtitle">DePaul Computer Science Alum</p>
+                            <p class="subtitle">Incoming Technical Support Engineer @ Adyen</p>
                         </div>
                     </div>
 
                     <!-- Bio Section -->
-                    <div class="profile-bio">
-                    </div>
+                    
 
                     <!-- Info Grid -->
                     <div class="info-grid">
                         <span><i class="fas fa-graduation-cap"></i> B.S. Computer Science — DePaul, Nov 2025</span>
-                        <span><i class="fas fa-graduation-cap" style="visibility: hidden;"></i> 3.69 GPA · Cum Laude · Spanish Minor</span>
                         <span><i class="fas fa-location-dot"></i> Chicago, IL</span>
                     </div>
 
@@ -101,9 +134,6 @@
                     <div class="cta-section">
                         <p class="cta-headline">Links</p>
                         <div class="links">
-                            <a href="/assets/Marko_Ljuboja_Resume.pdf" target="_blank" class="cta-button">
-                                Resume
-                            </a>
                             <a href="mailto:mljuboja16@gmail.com" class="cta-button">
                                 <i class="fas fa-envelope"></i> Email
                             </a>
@@ -242,12 +272,8 @@
                             </div>
                             <div class="project-item-content">
                                 <h3><img src="assets/images/project-images/serbdictionary/iosICON.webp" alt="serbDictionary App Icon" class="project-app-icon">serbDictionary</h3>
-                                <p class="project-item-description">iOS app translating Serbian ↔ English. Features include search, example sentences, and a word-of-the-day widget. Built natively with SwiftUI and optimized for offline use with SQLite.</p>
-                                <div class="project-item-tech">
-                                    <span class="tech-tag">SwiftUI</span>
-                                    <span class="tech-tag">SQLite</span>
-                                    <span class="tech-tag">WidgetKit</span>
-                                </div>
+                                <p class="project-item-description">iOS app for translating Serbian to English.</p>
+                                
                                 <div class="project-item-links">
                                     <a href="https://github.com/ljmakaronica/serbDictionaryiOSApp" target="_blank" class="project-link">GitHub</a>
                                     <a href="https://apps.apple.com/us/app/serbdictionary/id6753670428" target="_blank" class="project-link project-link-featured"><i class="fab fa-apple"></i> App Store</a>
@@ -278,14 +304,8 @@
                             </div>
                             <div class="project-item-content">
                                 <h3>iOS Stem Player</h3>
-                                <p class="project-item-description">Audio separation and playback tool leveraging the ML-based Demucs model. Upload songs and isolate vocals, drums, bass, and other instruments. Built with Swift frontend connected to Python/Flask backend for ML processing.</p>
-                                <div class="project-item-tech">
-                                    <span class="tech-tag">Swift</span>
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Flask</span>
-                                    <span class="tech-tag">Demucs</span>
-                                    <span class="tech-tag">ML</span>
-                                </div>
+                                <p class="project-item-description">Tool to isolate vocals and instruments from any song.</p>
+                                
                                 <div class="project-item-links">
                                     <a href="https://github.com/ljmakaronica/iOS-Stem-Player" target="_blank" class="project-link">GitHub</a>
                                 </div>
@@ -303,14 +323,8 @@
                             </div>
                             <div class="project-item-content">
                                 <h3>Refolio</h3>
-                                <p class="project-item-description">Full-stack web application that converts uploaded resumes into editable, hosted portfolio websites in under 60 seconds. Built and shipped end-to-end, with authentication, Stripe-based subscription billing, and Cloudflare-powered custom subdomain routing.</p>
-                                <div class="project-item-tech">
-                                    <span class="tech-tag">Next.js</span>
-                                    <span class="tech-tag">Supabase</span>
-                                    <span class="tech-tag">OpenAI</span>
-                                    <span class="tech-tag">Stripe</span>
-                                    <span class="tech-tag">Cloudflare</span>
-                                </div>
+                                <p class="project-item-description">Site that turns your resume into a portfolio website in under a minute.</p>
+                                
                                 <div class="project-item-links">
                                     <a href="https://github.com/ljmakaronica/refolio" target="_blank" class="project-link">GitHub</a>  
                                     <a href="https://myrefolio.com" target="_blank" class="project-link project-link-featured">Visit Website</a>
@@ -318,75 +332,7 @@
                             </div>
                         </article>
 
-                        <!-- Project: Forex Platform -->
-                        <article class="project-item">
-                            <div class="project-item-media">
-                                <div class="media-container">
-                                    <video loop muted playsinline autoplay class="project-video-inline">
-                                        <source src="assets/images/project-images/forex/forex.mp4" type="video/mp4">
-                                    </video>                                
-                                </div>
-                            </div>
-                            <div class="project-item-content">
-                                <h3>Forex Platform</h3>
-                                <p class="project-item-description"><strong>Awarded 3rd Place at the Northern Trust x DePaul Hackathon.</strong> Foreign exchange tradiing platform with real-time currency data visualization, trading simulator, and future view.</p>
-                                <div class="project-item-tech">
-                                    <span class="tech-tag">React</span>
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">LSTM</span>
-                                </div>
-                                <div class="project-item-links">
-                                    <a href="https://github.com/RichardLechko/depaul-northern-trust-hackathon" target="_blank" class="project-link">GitHub</a>
-                                    <a href="https://depaul-northern-trust-hackathon.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
-                                </div>
-                            </div>
-                        </article>
 
-                        <!-- Project: NBA Schedule -->
-                        <article class="project-item">
-                            <div class="project-item-media">
-                                <div class="media-container">
-                                    <video loop muted playsinline autoplay class="project-video-inline">
-                                        <source src="assets/images/project-images/nbaschedule/nba.mp4" type="video/mp4">
-                                    </video>
-                                </div>
-                            </div>
-                            <div class="project-item-content">
-                                <h3>NBA Schedule</h3>
-                                <p class="project-item-description">Web app displaying real-time NBA scores and schedules for the 2025-26 season. Also has game box scores and conference standings. Clean interface with live updates fetched from ESPN.</p>
-                                <div class="project-item-tech">
-                                    <span class="tech-tag">HTML/CSS</span>
-                                    <span class="tech-tag">JavaScript</span>
-                                    <span class="tech-tag">API</span>
-                                </div>
-                                <div class="project-item-links">
-                                    <a href="https://github.com/ljmakaronica/NBAScoresWebsite" target="_blank" class="project-link">GitHub</a>
-                                    <a href="https://nba2026.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
-                                </div>
-                            </div>
-                        </article>
-
-                        <!-- Project: NowOrNever -->
-                        <article class="project-item">
-                            <div class="project-item-media">
-                                <div class="media-container">
-                                    <img src="assets/images/project-images/nowornever/nowornever1.png" alt="NowOrNever screenshot" class="project-image-inline">
-                                </div>
-                            </div>
-                            <div class="project-item-content">
-                                <h3>NowOrNever</h3>
-                                <p class="project-item-description">React web app made for the IIT ScarletHacks Hackathon. Connects restaurants to customers for last-minute food purchases, reducing food waste. Features AI-powered food image analysis and real-time inventory management with Supabase backend.</p>
-                                <div class="project-item-tech">
-                                    <span class="tech-tag">React</span>
-                                    <span class="tech-tag">AI</span>
-                                    <span class="tech-tag">Supabase</span>
-                                </div>
-                                <div class="project-item-links">
-                                    <a href="https://github.com/RichardLechko/IIT-Hackathon" target="_blank" class="project-link">GitHub</a>
-                                    <a href="https://iit-hackathon.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
-                                </div>
-                            </div>
-                        </article>
                     </div>
 
                     <!-- More Projects Toggle -->
@@ -400,12 +346,38 @@
                     <!-- Hidden Extra Projects -->
                     <div class="more-projects-list" id="more-projects-list">
                         <article class="more-project-item">
-                            <h3>Trading Simulator</h3>
-                            <p>Stock trading simulator with order book management, buy/sell matching, user portfolio tracking, and a publisher/subscriber pattern for real-time market updates.</p>
-                            <div class="project-item-tech">
-                                <span class="tech-tag">Java</span>
-                                <span class="tech-tag">Design Patterns</span>
+                            <h3>Forex Platform</h3>
+                            <p><strong>Awarded 3rd Place at a hackathon.</strong> Foreign exchange trading platform with a simulator and real time data.</p>
+                            
+                            <div class="project-item-links">
+                                <a href="https://github.com/RichardLechko/depaul-northern-trust-hackathon" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://depaul-northern-trust-hackathon.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
                             </div>
+                        </article>
+
+                        <article class="more-project-item">
+                            <h3>NBA Schedule</h3>
+                            <p>Clean interface to check NBA scores and schedules.</p>
+                            
+                            <div class="project-item-links">
+                                <a href="https://github.com/ljmakaronica/NBAScoresWebsite" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://nba2026.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
+                            </div>
+                        </article>
+
+                        <article class="more-project-item">
+                            <h3>NowOrNever</h3>
+                            <p>App built at a hackathon that connects restaurants to people for last minute food purchases to reduce waste.</p>
+                            
+                            <div class="project-item-links">
+                                <a href="https://github.com/RichardLechko/IIT-Hackathon" target="_blank" class="project-link">GitHub</a>
+                                <a href="https://iit-hackathon.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
+                            </div>
+                        </article>
+                        <article class="more-project-item">
+                            <h3>Trading Simulator</h3>
+                            <p>Stock trading simulator with order book management and real time updates.</p>
+                            
                             <div class="project-item-links">
                                 <a href="https://github.com/ljmakaronica/tradingSimSE350" target="_blank" class="project-link">GitHub</a>
                             </div>
@@ -413,11 +385,8 @@
 
                         <article class="more-project-item">
                             <h3>buylater</h3>
-                            <p>Modern e-commerce shopping cart with add/remove functionality and real-time updates in a clean, minimalist design.</p>
-                            <div class="project-item-tech">
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">HTML/CSS</span>
-                            </div>
+                            <p>Simple e-commerce shopping cart built with clean html.</p>
+                            
                             <div class="project-item-links">
                                 <a href="https://github.com/ljmakaronica/shopping-cart" target="_blank" class="project-link">GitHub</a>
                                 <a href="https://buylater.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
@@ -426,11 +395,8 @@
 
                         <article class="more-project-item">
                             <h3>Pre Flop Helper</h3>
-                            <p>Poker pre-flop hand selection guide with position-based recommendations for optimal starting hand ranges across different table sizes.</p>
-                            <div class="project-item-tech">
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">HTML/CSS</span>
-                            </div>
+                            <p>Pre-flop hand selection guide for poker beginners.</p>
+                            
                             <div class="project-item-links">
                                 <a href="https://github.com/ljmakaronica/PreFlopHelper" target="_blank" class="project-link">GitHub</a>
                                 <a href="https://pre-flop-helper.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
@@ -439,11 +405,8 @@
 
                         <article class="more-project-item">
                             <h3>NFL FG Calculator</h3>
-                            <p>Interactive NFL field goal distance calculator visualizing kicker success rates with drag-and-drop functionality and 2025 season stats for all 32 teams.</p>
-                            <div class="project-item-tech">
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">HTML/CSS</span>
-                            </div>
+                            <p>Interactive field goal distance calculator visualizing kicker stats for all 32 NFL teams.</p>
+                            
                             <div class="project-item-links">
                                 <a href="https://github.com/ljmakaronica/fg-calc" target="_blank" class="project-link">GitHub</a>
                                 <a href="https://fg-calc.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
@@ -452,12 +415,8 @@
 
                         <article class="more-project-item">
                             <h3>NBA Fantasy Analytics</h3>
-                            <p>Custom NBA fantasy basketball scoring engine with weighted statistical models, age-based potential analysis, and injury risk assessment.</p>
-                            <div class="project-item-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Pandas</span>
-                                <span class="tech-tag">NumPy</span>
-                            </div>
+                            <p>Custom NBA fantasy scoring engine.</p>
+                            
                             <div class="project-item-links">
                                 <a href="https://github.com/ljmakaronica/Fantasy-Draft-Tool-for-Sleeper" target="_blank" class="project-link">GitHub</a>
                             </div>
@@ -465,13 +424,8 @@
 
                         <article class="more-project-item">
                             <h3>CTA Tracker</h3>
-                            <p>Lightweight CTA train and bus tracker configured for my own commute. Shows real-time arrival predictions for nearby stations.</p>
-                            <div class="project-item-tech">
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">Node.js</span>
-                                <span class="tech-tag">CTA API</span>
-                                <span class="tech-tag">Vercel</span>
-                            </div>
+                            <p>Lightweight tracker showing real time train and bus arrivals for my personal commute.</p>
+                            
                             <div class="project-item-links">
                                 <a href="https://github.com/ljmakaronica/cta-tracker" target="_blank" class="project-link">GitHub</a>
                                 <a href="https://pilsentrains.vercel.app" target="_blank" class="project-link project-link-featured">Visit Website</a>
@@ -480,42 +434,30 @@
                     </div>
                 </div>
 
-                <!-- Footer CTA -->
-                <footer class="footer-cta">
-                    <h2>Let's Connect</h2>
-                    <div class="footer-cta-links">
-                        <a href="mailto:mljuboja16@gmail.com" class="cta-button">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
-                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank" class="cta-button">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/ljmakaronica" target="_blank" class="cta-button">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                    </div>
-                </footer>
-
                 <!-- Footer -->
                 <footer class="site-footer">
-                    <!-- Compact Personal Widgets -->
-                    <p class="footer-widgets-label">Lately</p>
-                    <div class="footer-widgets">
-                        <a href="#" id="spotify-link" target="_blank" class="footer-widget">
-                            <img id="album-image" src="" alt="Album" class="footer-widget-img">
+                    <div class="footer-widgets mobile-only">
+                        <a href="#" id="spotify-link-mobile" target="_blank" class="footer-widget">
+                            <img id="album-image-mobile" src="" alt="Album" class="footer-widget-img">
                             <span class="footer-widget-text">
-                                <span id="song-title">Loading...</span>
-                                <span id="artist-name">Spotify</span>
+                                <span id="song-title-mobile">Loading...</span>
+                                <span id="artist-name-mobile">Spotify</span>
                             </span>
                         </a>
                         <span class="footer-widget-divider">·</span>
-                        <a id="goodreads-link" href="https://www.goodreads.com/book/show/824279.The_Death_of_Ivan_Ilyich_and_Other_Stories" target="_blank" class="footer-widget">
-                            <img src="assets/images/ivan.png" id="book-image" alt="Book" class="footer-widget-img book">
+                        <a id="goodreads-link-mobile" href="https://www.goodreads.com/book/show/824279.The_Death_of_Ivan_Ilyich_and_Other_Stories" target="_blank" class="footer-widget">
+                            <img src="assets/images/ivan.png" id="book-image-mobile" alt="Book" class="footer-widget-img book">
                             <span class="footer-widget-text">
-                                <span id="book-title">The Death of Ivan Ilyich</span>
-                                <span id="book-author">Leo Tolstoy</span>
+                                <span id="book-title-mobile">The Death of Ivan Ilyich</span>
+                                <span id="book-author-mobile">Leo Tolstoy</span>
                             </span>
                         </a>
+                    </div>
+                    
+                    <div class="footer-bottom-links">
+                        <a href="mailto:mljuboja16@gmail.com"><i class="fas fa-envelope"></i></a>
+                        <a href="https://github.com/ljmakaronica" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/markoljuboja/" target="_blank"><i class="fab fa-linkedin"></i></a>
                     </div>
                     <p>© 2026 Marko Ljuboja</p>
                 </footer>
