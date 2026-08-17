@@ -2,7 +2,6 @@ import { Buffer } from 'buffer';
 
 // ─── Module-level token cache (persists across warm serverless invocations) ───
 let cachedAccessToken = null;
-let cachedRefreshToken = null;
 
 // ─── Rate limiting state ───
 const rateLimitState = new Map();
@@ -38,7 +37,7 @@ function getAccessToken() {
 }
 
 function getRefreshToken() {
-  return cachedRefreshToken || process.env.SPOTIFY_REFRESH_TOKEN;
+  return process.env.SPOTIFY_REFRESH_TOKEN;
 }
 
 async function rateLimitMiddleware(req, res) {
@@ -151,10 +150,9 @@ async function refreshToken() {
 
   const data = await response.json();
 
-  // Handle expired refresh token (6-month lifetime as of July 2026)
+  // Handle expired or invalid refresh token
   if (data.error === 'invalid_grant') {
     cachedAccessToken = null;
-    cachedRefreshToken = null;
     throw new Error('REFRESH_TOKEN_EXPIRED');
   }
 
@@ -164,11 +162,6 @@ async function refreshToken() {
 
   // Cache the new access token
   cachedAccessToken = data.access_token;
-
-  // Save rotated refresh token if Spotify returns one
-  if (data.refresh_token) {
-    cachedRefreshToken = data.refresh_token;
-  }
 }
 
 export default async function handler(req, res) {

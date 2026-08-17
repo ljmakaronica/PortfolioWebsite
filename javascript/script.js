@@ -123,30 +123,47 @@ const playerState = {
 
 const REFRESH_INTERVAL = 30 * 1000; // 30 seconds
 
-// UI Elements
+// UI Elements (updates both desktop and mobile elements)
 const spotifyUI = {
-    songTitle: document.getElementById('song-title'),
-    artistName: document.getElementById('artist-name'),
-    albumImage: document.getElementById('album-image'),
-    spotifyLink: document.getElementById('spotify-link'),
+    updateElements(id, content, attr = 'textContent') {
+        const desktopEl = document.getElementById(id);
+        const mobileEl = document.getElementById(`${id}-mobile`);
+        if (desktopEl) {
+            if (attr === 'textContent') desktopEl.textContent = content;
+            else desktopEl[attr] = content;
+        }
+        if (mobileEl) {
+            if (attr === 'textContent') mobileEl.textContent = content;
+            else mobileEl[attr] = content;
+        }
+    },
+
+    setDisplay(id, display) {
+        const desktopEl = document.getElementById(id);
+        const mobileEl = document.getElementById(`${id}-mobile`);
+        if (desktopEl) desktopEl.style.display = display;
+        if (mobileEl) mobileEl.style.display = display;
+    },
 
     updatePlayer(track) {
         if (!track) return;
         const { title, artist, albumUrl, spotifyUrl } = track;
         if (title !== playerState.currentTrack.title ||
             artist !== playerState.currentTrack.artist) {
-            if (this.songTitle) this.songTitle.textContent = title;
-            if (this.artistName) this.artistName.textContent = artist;
-            if (this.albumImage) this.albumImage.src = albumUrl;
-            if (this.spotifyLink) this.spotifyLink.href = spotifyUrl;
+            
+            this.updateElements('song-title', title);
+            this.updateElements('artist-name', artist);
+            this.updateElements('album-image', albumUrl, 'src');
+            this.updateElements('spotify-link', spotifyUrl, 'href');
+            
             playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
         }
     },
 
     showUnavailable() {
-        if (this.songTitle) this.songTitle.textContent = 'Unavailable';
-        if (this.artistName) this.artistName.textContent = 'Spotify';
-        if (this.albumImage) this.albumImage.style.display = 'none';
+        this.updateElements('song-title', 'Unavailable');
+        this.updateElements('artist-name', 'Spotify');
+        this.setDisplay('album-image', 'none');
     }
 };
 
