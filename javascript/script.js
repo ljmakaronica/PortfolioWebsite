@@ -155,6 +155,7 @@ const spotifyUI = {
             this.updateElements('artist-name', artist);
             this.updateElements('album-image', albumUrl, 'src');
             this.updateElements('spotify-link', spotifyUrl, 'href');
+            this.setDisplay('album-image', '');
             
             playerState.currentTrack = { title, artist, albumUrl, spotifyUrl };
         }
