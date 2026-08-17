@@ -33,7 +33,7 @@ function getIP(req) {
 }
 
 function getAccessToken() {
-  return cachedAccessToken || process.env.SPOTIFY_ACCESS_TOKEN;
+  return cachedAccessToken;
 }
 
 function getRefreshToken() {
