@@ -34,41 +34,40 @@ body * {
         box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Root Variables - Warm Cream & Teal Theme */
+/* Root Variables */
 :root {
-    --text-primary: #1C1917;
-    --text-secondary: #78716C;
-    --accent: #78716C;
-    --accent-dark: #57534E;
-    --accent-glow: rgba(120, 113, 108, 0.2);
-    --bg-dark: #FFFBF5;
-    --bg-gradient: linear-gradient(135deg, #FFFBF5 0%, #FEF7EC 100%);
-    --card-bg: rgba(254, 247, 236, 0.9);
-    --card-border: rgba(231, 218, 199, 0.8);
-    --card-hover-bg: rgba(254, 243, 228, 0.98);
+    --text-primary: #111111;
+    --text-secondary: #6B7280;
+    --accent: #007AFF;
+    --accent-dark: #0063D1;
+    --accent-glow: rgba(0, 122, 255, 0.12);
+    --bg-dark: #FFFFFF;
+    --bg-gradient: none;
+    --card-bg: #F9FAFB;
+    --card-border: #E5E7EB;
+    --card-hover-bg: #F3F4F6;
     --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    --shadow: 0 8px 32px 0 rgba(28, 25, 23, 0.06);
-    --glass-blur: blur(12px);
-    --cta-primary: #1C1917;
-    --cta-secondary: #78716C;
-    /* Featured link color - rich charcoal for App Store / View Website */
-    --featured-link-bg: #292524;
-    --featured-link-hover: #1C1917;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04);
+    --glass-blur: none;
+    --cta-primary: #111111;
+    --cta-secondary: #6B7280;
+    --featured-link-bg: #007AFF;
+    --featured-link-hover: #0063D1;
 }
 
 [data-theme="dark"] {
-    --bg-dark: #0C0A09;
-    --bg-gradient: linear-gradient(135deg, #0C0A09 0%, #1C1917 100%);
-    --text-primary: #FAFAF9;
-    --text-secondary: #A8A29E;
-    --card-bg: rgba(28, 25, 23, 0.9);
-    --card-border: rgba(68, 64, 60, 0.8);
-    --card-hover-bg: rgba(41, 37, 36, 0.98);
-    --accent-glow: rgba(120, 113, 108, 0.15);
-    --cta-primary: #FAFAF9;
-    --cta-secondary: #A8A29E;
-    --featured-link-bg: #FAFAF9;
-    --featured-link-hover: #E7E5E4;
+    --bg-dark: #0A0A0A;
+    --bg-gradient: none;
+    --text-primary: #F5F5F5;
+    --text-secondary: #9CA3AF;
+    --card-bg: #141414;
+    --card-border: #262626;
+    --card-hover-bg: #1A1A1A;
+    --accent-glow: rgba(0, 122, 255, 0.1);
+    --cta-primary: #F5F5F5;
+    --cta-secondary: #9CA3AF;
+    --featured-link-bg: #007AFF;
+    --featured-link-hover: #0063D1;
 }
 
 .theme-toggle {
@@ -1228,28 +1227,9 @@ body {
    SMALL MOBILE - Performance optimizations
    =========================================== */
 @media (max-width: 480px) {
-    :root {
-        --accent-glow: rgba(200, 155, 123, 0.15);
-        --glass-blur: blur(8px);
-    }
-
-    .skills span,
-    .tech-tag,
-    .widget-card,
-    .project-link,
-    .links a {
-        backdrop-filter: blur(6px);
-    }
-
     .profile-view {
         padding: 1.5rem 1rem;
     }
-
-    .widget-card {
-        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.25);
-    }
-
-    
 }
 
 /* ===========================================
@@ -1258,7 +1238,7 @@ body {
 @media (prefers-reduced-motion: reduce) {
     :root {
         --transition: none;
-        --accent-glow: rgba(200, 155, 123, 0.15);
+        --accent-glow: rgba(0, 122, 255, 0.08);
     }
 
     .dot {
